@@ -1,0 +1,6 @@
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304160555.bin
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304174815.bin
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304173431.bin
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304173137.bin
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304155651.bin
+/home/bsp32/work/102_aa/openwrt/bin/armadadb/HNM2_01.00B02_20140304155608.bin
