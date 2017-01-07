@@ -5,10 +5,13 @@ me=${0##*/}
 
 # Default configuration
 # This can be ignore if you set via command arguments
+# Source image file should be restricted to name: daisy-base.tar.gz
 _source_img="./daisy-base.tar.gz"
 _source_spec="./daisy-base.spec"
 _version="1.0.0"
 _release="20170101.el7"
+
+echo "Your input: $@"
 
 if [[ $# -ne 0 ]];then
     while true
@@ -16,25 +19,25 @@ if [[ $# -ne 0 ]];then
         case $1 in
         -i | --image)
         _SOURCEIMG=$2
-        shift
+        shift 2
         ;;
 
         -c | --spec)
         _SOURCESPEC=$2
-        shift
+        shift 2
         ;;
 
         -v | --version)
         _VERSION=$2
-        shift
+        shift 2
         ;;
 
         -r | --release)
         _RELEASE=$2
-        shift
+        shift 2
         ;;
 
-        *)
+        -* | --* | -h | --help | help)
         echo "Command usage:"
         echo "    -i    Path to image file(daisy-base.tar.gz)"
         echo "    -c    Path to spec file(daisy-base.spec)"
@@ -45,13 +48,15 @@ if [[ $# -ne 0 ]];then
         exit 1
         ;;
 
+        *)
+        break
+        ;;
+
         esac
     done
 fi
 
-# source image file should be restricted to name:
-# daisy-base.tar.gz, $1 could be a full-path name
-echo 'source image is:$_SOURCEIMG'
+echo "source image is:$_SOURCEIMG"
 if [[ $_SOURCEIMG == "" ]];then
     _SOURCEIMG=$_source_img
 fi
@@ -66,24 +71,24 @@ if [[ $_RELEASE == "" ]];then
 fi
 
 anchor="daisy-base-1.0.0"
-tmpdir=$(mktemp -d)
-mkdir -p $tmpdir/$anchor
-cp $_SOURCEIMG $tmpdir/$anchor/
+# tmpdir=$(mktemp -d)
+# mkdir -p $tmpdir/$anchor
+# cp $_SOURCEIMG $tmpdir/$anchor/
 cd $tmpdir/
-tar -czvf $anchor.tar.gz -C $tmpdir $anchor
-mv $anchor.tar.gz /root/rpmbuild/SOURCES/
+# tar -czvf $anchor.tar.gz -C $tmpdir $anchor
+# mv $anchor.tar.gz /root/rpmbuild/SOURCES/
 cd /root/rpmbuild/SPECS/
 
 
 # Please run this script below /root/rpmbuild/SPECS
 # Here double quote is needed for variables quotation
-rpmbuild -bb --define "_arch x86_64" --define "_topdir /root/rpmbuild" --define "_version $_VERSION" --define "_release $_RELEASE" $_SOURCESPEC
+# rpmbuild -bb --define "_arch x86_64" --define "_topdir /root/rpmbuild" --define "_version $_VERSION" --define "_release $_RELEASE" $_SOURCESPEC
 
 # Automatically send rpm package to repo repository
 if [[ $? -eq 0 ]];then
-    rsync ../RPMS/x86_64/daisy-base-$_version-$_release.x86_64.rpm root@cml04:/data/yum.repo/daisy/daisy-compile/
+    rsync ../RPMS/x86_64/daisy-base-$_VERSION-$_RELEASE.x86_64.rpm root@cml04:/data/yum.repo/daisy/daisy-compile/
     ssh root@cml04 'cd /data/yum.repo/daisy/daisy-compile/;createrepo -p --update -o . .'
 
-    rsync ../RPMS/x86_64/daisy-base-$_version-$_release.x86_64.rpm root@repobase:/var/www/html/repo/yum/daisy/
+    rsync ../RPMS/x86_64/daisy-base-$_VERSION-$_RELEASE.x86_64.rpm root@repobase:/var/www/html/repo/yum/daisy/
     ssh root@repobase 'cd /var/www/html/repo/yum/daisy/;createrepo -p --update -o . .'
 fi
