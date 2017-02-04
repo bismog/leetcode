@@ -1,0 +1,6 @@
+2017-01-24 09:45:42,028 - exampleApp - INFO - program started
+2017-01-24 09:45:42,028 - exampleApp.otherMod2.add - INFO - added 7 and 8 to get 15
+2017-01-24 09:45:42,028 - exampleApp - INFO - done!
+2017-01-24 09:46:13,349 - exampleApp - INFO - program started
+2017-01-24 09:46:13,349 - exampleApp.otherMod2.add - INFO - added 7 and 8 to get 15
+2017-01-24 09:46:13,349 - exampleApp - INFO - done!

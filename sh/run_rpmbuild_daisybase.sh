@@ -9,7 +9,7 @@ me=${0##*/}
 _source_img="./daisy-base.tar.gz"
 _source_spec="./daisy-base.spec"
 _version="1.0.0"
-_release="20170101.el7"
+_release="20170105.el7"
 
 echo "Your input: $@"
 
@@ -71,18 +71,18 @@ if [[ $_RELEASE == "" ]];then
 fi
 
 anchor="daisy-base-1.0.0"
-# tmpdir=$(mktemp -d)
-# mkdir -p $tmpdir/$anchor
-# cp $_SOURCEIMG $tmpdir/$anchor/
+tmpdir=$(mktemp -d)
+mkdir -p $tmpdir/$anchor
+cp $_SOURCEIMG $tmpdir/$anchor/
 cd $tmpdir/
-# tar -czvf $anchor.tar.gz -C $tmpdir $anchor
-# mv $anchor.tar.gz /root/rpmbuild/SOURCES/
+tar -czvf $anchor.tar.gz -C $tmpdir $anchor
+mv $anchor.tar.gz /root/rpmbuild/SOURCES/
 cd /root/rpmbuild/SPECS/
 
 
 # Please run this script below /root/rpmbuild/SPECS
 # Here double quote is needed for variables quotation
-# rpmbuild -bb --define "_arch x86_64" --define "_topdir /root/rpmbuild" --define "_version $_VERSION" --define "_release $_RELEASE" $_SOURCESPEC
+rpmbuild -bb --define "_arch x86_64" --define "_topdir /root/rpmbuild" --define "_version $_VERSION" --define "_release $_RELEASE" $_SOURCESPEC
 
 # Automatically send rpm package to repo repository
 if [[ $? -eq 0 ]];then

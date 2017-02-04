@@ -1,0 +1,18 @@
+DEBUG:root:This is a debug message
+INFO:root:Informational message
+ERROR:root:An error has happened!
+ERROR:ex:Error
+Traceback (most recent call last):
+  File "simple_logger2.py", line 10, in <module>
+    raise RuntimeError
+RuntimeError
+ERROR:ex:Error
+Traceback (most recent call last):
+  File "simple_logger2.py", line 10, in <module>
+    raise RuntimeError
+RuntimeError
+ERROR:ex:RuntimeError
+Traceback (most recent call last):
+  File "simple_logger2.py", line 10, in <module>
+    raise RuntimeError
+RuntimeError
