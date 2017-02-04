@@ -48,9 +48,6 @@ if __name__ == "__main__":
         AmazonFetch()
     )
 
-    # taskflow.engines.run(flow, store=dict(google_url='http://baidu.com',
-    #                                       amazon_url='http://www.taobao.com'))
-
     engine = taskflow.engines.load(flow,
         store = dict(
             google_url = 'http://baidu.com',
