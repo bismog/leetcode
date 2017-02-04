@@ -1,0 +1,12 @@
+11 files changed, 226 insertions(+)
+ create mode 100755 python/cw-generate-bc.py
+ create mode 100644 python/mock/mymodule.py
+ create mode 100644 python/mock/mymodule.pyc
+ create mode 100644 python/mock/mymodule_c.py
+ create mode 100644 python/mock/mymodule_c.pyc
+ create mode 100755 python/mock/test_mymodule.py
+ create mode 100755 python/mock/test_mymodule2.py
+ create mode 100755 python/mock/test_mymodule_c.copyfrom.py
+ create mode 100755 python/mock/test_mymodule_c.py
+ create mode 100755 sh/while_print.sh
+ create mode 100755 sh/while_print_2.sh
