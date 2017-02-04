@@ -1,0 +1,52 @@
+http://www.pythondoc.com/pythontutorial27/datastructures.html
+>>> lll=[]
+>>> lll.append('a')
+>>> lll
+['a']
+>>> lll[len(lll):]='b'
+>>> lll
+['a', 'b']
+>>> len(lll)
+2
+>>> llx=[1,2]
+>>> lly=[8,9]
+>>> llx.extend(lly)
+>>> llx
+[1, 2, 8, 9]
+>>> lll.insert(1,'a-b')
+>>> lll
+['a', 'a-b', 'b']
+>>> lll.insert(0, '0-a')
+>>> lll
+['0-a', 'a', 'a-b', 'b']
+>>> lll.insert(len(lll), 'end')
+>>> lll
+['0-a', 'a', 'a-b', 'b', 'end']
+>>> lll.remove(2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: list.remove(x): x not in list
+>>> lll.remove('end')
+>>> lll
+['0-a', 'a', 'a-b', 'b']
+>>> lll.pop(0)
+'0-a'
+>>> lll
+['a', 'a-b', 'b']
+>>> lll.pop()
+'b'
+>>> lll
+['a', 'a-b']
+>>> lll.index('a-b')
+1
+>>> lll.append('a')
+>>> lll.count('a')
+2
+>>> lll
+['a', 'a-b', 'a']
+>>> lll.extend(['b', 'c', 'd'])
+>>> lll
+['a', 'a-b', 'a', 'b', 'c', 'd']
+>>> lll.sort()
+>>> lll
+['a', 'a', 'a-b', 'b', 'c', 'd']
