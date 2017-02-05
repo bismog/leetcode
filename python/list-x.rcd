@@ -50,3 +50,13 @@ ValueError: list.remove(x): x not in list
 >>> lll.sort()
 >>> lll
 ['a', 'a', 'a-b', 'b', 'c', 'd']
+>>> lll=['a', 'b', 'c', 'ab', 'cd', 'bc', 'ad']
+>>> lll.reverse()
+>>> lll
+['ad', 'bc', 'cd', 'ab', 'c', 'b', 'a']
+>>> lll.sort()
+>>> lll
+['a', 'ab', 'ad', 'b', 'bc', 'c', 'cd']
+>>> lll.reverse()
+>>> lll
+['cd', 'c', 'bc', 'b', 'ad', 'ab', 'a']
