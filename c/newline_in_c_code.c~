@@ -1,0 +1,13 @@
+#include <stdlib.h>;
+      2 #include <stdio.h>;
+            3
+                  4 int main(int argc,char** argv)
+          5 {
+                    6         if(argc!=2){
+                              7                 printf("I need a single argument,which must \
+                                            8                                 be a dictionary\n");
+                                    9                 exit(1);
+                                         10         }
+                                              11
+                                                       12         return 0;
+                                                   13 }

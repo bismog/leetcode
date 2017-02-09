@@ -1,0 +1,7 @@
+int main()
+{
+       char a[5]={'A','B','C','D'};
+          char (*p3)[5] = &a;
+             char (*p4)[5] = a;
+                return 0;
+}

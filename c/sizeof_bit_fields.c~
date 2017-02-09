@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+struct test1
+ {
+       char a:1;
+         char :2;
+                 long b:3;
+                   char c:2;
+                    };
+
+  struct test2
+   {
+         char a:1;
+           char :2;
+                   char b:3;
+                     long c:2;
+                      };
+
+  struct test3
+   {
+         char a:1;
+           char :2;
+                   char b:3;
+                     char c:2;
+                      };
+
+int main()
+{
+  test1 t1;
+  test2 t2;
+  test3 t3;
+
+  int len1 = sizeof(t1);
+  int len2 = sizeof(t2);
+  int len3 = sizeof(t3);
+
+    printf("len of len1:%d", len1);
+    printf("len of len2:%d", len2);
+    printf("len of len3:%d", len3);
+
+    return 0;
+}
