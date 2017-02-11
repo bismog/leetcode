@@ -9,16 +9,16 @@ class Node(object):
         self._item = item
         self._next = None
 
-    def _set_item(self, item):
+    def set_item(self, item):
         self._item = item
 
-    def _set_next(self, node):
+    def set_next(self, node):
         self._next = node
 
-    def _get_item(self):
+    def get_item(self):
         return self._item
 
-    def _get_next(self):
+    def get_next(self):
         return self._next
 
 
@@ -43,30 +43,31 @@ class LinkedList(object):
             self._size -= 1
         self._size = 0
 
-    def _index(self, item):
+    def index(self, item):
         if self._is_empty():
             raise NotFound, '%s not found' % item
 
         count = 0
         cnode = self._head
-        while cnode._get_next():
-            if cnode._get_item() == item:
+        while cnode.get_next():
+            if cnode.get_item() == item:
                 return count
             else:
-                cnode = cnode._get_next()
+                cnode = cnode.get_next()
                 count += 1
         raise NotFound, '%s not found' % item
 
-    def _search(self, item):
+    def search(self, item):
         def _find(self, item):
-            return False if not self._index(item) else True
+            return False if not self.index(item) else True
         return _find(item)
 
-    def _remove(self, item):
+    def remove(self, item):
         try:
-            index = self._index(item)
+            index = self.index(item)
         except NotFound:
             print '%s not found' % item
+            return False
 
         count = 0
         pre = None
@@ -74,46 +75,71 @@ class LinkedList(object):
         while cnode:
             if count == index:
                 if not pre:
-                    self._head = cnode._get_next()
+                    self._head = cnode.get_next()
                 else:
-                    pre._next = cnode._get_next()
-                    # or the same as: pre._set_next(cnode._get_next())
+                    pre._next = cnode.get_next()
+                    # or the same as: pre.set_next(cnode.get_next())
                 self._dec_size()
                 return True
             else:
                 count += 1
                 pre = cnode
-                cnode = cnode._get_next()
+                cnode = cnode.get_next()
+        return False
 
-    def _insert(self, item, index = 0):
+    def insert(self, item, index = 0):
         inode = Node(item)
 
         count = 0
         pre = None
         cnode = self._head
-        while cnode._get_next():
+        while cnode.get_next():
             if count == index:
                 if not pre:
                     self._head = inode
-                    self._set_next(cnode)
+                    inode.set_next(cnode)
                 else:
-                    pre._set_next(inode)
-                    inode._set_next(pre._get_next())
-                break
+                    pre.set_next(inode)
+                    inode.set_next(pre.get_next())
+                self._inc_size()
+                return True
             else:
                 count += 1
                 pre = cnode
-                cnode = cnode._get_next()
+                cnode = cnode.get_next()
+        return False
 
-    def _append(self, item):
+    def append(self, item):
         inode = Node(item)
         if self._is_empty():
             self._head = inode
         else:
             cnode = self._head
-            while cnode._get_next():
-                cnode = cnode._get_next()
-            cnode._set_next(inode)
+            while cnode.get_next():
+                cnode = cnode.get_next()
+            cnode.set_next(inode)
 
+    def list(self):
+        out = []
+        cnode = self._head
+        while cnode:
+            out.append(cnode.get_item())
+            cnode = cnode.get_next()
+        return out
 
+def main():
+    xnode = Node(3)
+    linked_list = LinkedList(xnode)
 
+    # ynode = Node(4)
+    linked_list.append(4)
+    linked_list.append(5)
+    linked_list.append(6)
+    # linked_list.remove(5)
+    linked_list.insert(2)
+
+    disp = tuple(linked_list.list())
+    print disp
+
+if __name__ == "__main__":
+    main()
