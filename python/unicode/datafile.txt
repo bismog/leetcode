@@ -1,0 +1,2 @@
+/etc/shells\x00Shells available on caf\xc3\xa9.lan
+/var/tmp/file\xff\x00File with non-utf8 data in the filename
