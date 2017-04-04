@@ -1,0 +1,7 @@
+digraph graphname {
+    a -> {b c}
+}
+
+# subgraph {
+#     rank = same; a; b; c
+# }

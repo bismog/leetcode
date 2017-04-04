@@ -1,0 +1,9 @@
+graph graphname {
+  // label属性可以改变节点的显示名称
+  a [label="Foo"];
+  // 节点形状被改变了
+  b [shape=box, style="filled", color="black", fillcolor="chartreuse"];
+  // a-b边和b-c边有相同的属性
+  a -- b -- c [color=blue];
+  b -- d [style=dotted];
+}

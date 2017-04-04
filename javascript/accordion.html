@@ -1,0 +1,42 @@
+<!doctype html>
+<!--http://wiki.jikexueyuan.com/project/jquery-tutorial/jquery-ui-accordion-example.html-->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Demos</title>
+    <link rel="stylesheet" href="themes/trontastic/jquery-ui.css" />
+    <script src="scripts/jquery-1.9.1.js"></script>
+    <script src="scripts/jquery-ui-1.10.1.custom.js"></script>
+
+    <script>
+        $(function () {
+
+        });
+    </script>
+</head>
+<body>
+    <div id="accordion_xxx">
+        <h1>Section 1</h1>
+        <div>
+            <p>Description 1</p>
+        </div>
+        <h2>Section 2</h2>
+        <div>
+            <p>Description 3</p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+            <p>Description 3</p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        $("#accordion_xxx").accordion();
+    </script>
+</body>
+</html>
