@@ -24,14 +24,35 @@ class Fruit(Base):
 # Create table
 Fruit.metadata.create_all(engine)
 
-# Create sqlalchemy session
-Session = sessionmaker(bind=engine)
-session = Session()
+class Session():
+
+    def __init__(self, engine):
+        # Create sqlalchemy session
+        self.session = sessionmaker(bind=engine)()
+
+    def __call__(self):
+        return self.session
+
+
+    def add(self, obj):
+        # Duplicate verification
+        get_fruit = session.query(Fruit).filter_by(name=obj.name).first()
+
+        if not get_fruit:
+            # Add data to table
+            self.session.add(obj)
+    def commit(self, *args, **kwargs):
+        self.session.commit(*args, **kwargs)
+
+    def query(self, *args, **kwargs):
+        return self.session.query(*args, **kwargs)
 
 # Insert data
 fruit1 = Fruit('apple', 'red')
 fruit2 = Fruit('banana', 'yellow')
 fruit3 = Fruit('grape', 'purple')
+
+session = Session(engine)
 session.add(fruit1)
 session.add(fruit2)
 session.add(fruit3)
