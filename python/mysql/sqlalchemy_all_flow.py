@@ -35,8 +35,12 @@ class Session():
 
 
     def add(self, obj):
+        """
+        We add this function override that of sessionmaker(bing=engine) to make 
+        sure no repeat data insertion.
+        """
         # Duplicate verification
-        get_fruit = session.query(Fruit).filter_by(name=obj.name).first()
+        get_fruit = self.session.query(Fruit).filter_by(name=obj.name).first()
 
         if not get_fruit:
             # Add data to table
