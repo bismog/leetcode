@@ -14,4 +14,5 @@ def our_function(numbers):
     result = _sum.our_function(ctypes.c_int(num_numbers), array_type(*numbers))
     return int(result)
 
+# print our_function([1, 2, -3, 4, -5, 6])
 our_function(sys.argv[])
