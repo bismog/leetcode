@@ -316,6 +316,8 @@ def main():
     gerrit = Gerrit()
     gerrit.get_review_list(team_member)
     gerrit.reviews_detail()
+    # Here is_team_review can also a method from class, a example:
+    # https://stackoverflow.com/questions/7750982/can-pythons-map-function-call-object-member-functions
     team_reviews = filter(is_team_review, gerrit.review_data)
 
     # For each review, gerrit query and render code-reviewer points, CI points, 
