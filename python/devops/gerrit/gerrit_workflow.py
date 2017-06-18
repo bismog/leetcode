@@ -3,8 +3,9 @@
 
 import subprocess
 import json
+from optparse import OptionParser, OptionGroup
 
-EXCLUDED_CHANGE=['226282', '260256', '258963', '259009']
+EXCLUDED_CHANGE=['286481',]
 
 # Not include QA for QA may has many issue state as 'to-be-verified' to 
 # manage, it would be a large of noise
@@ -105,9 +106,10 @@ def can_auto_workflow(review):
 
 class Gerrit(object):
 
-    def __init__(self):
+    def __init__(self, option):
         self.review_list = []
         self.review_data = []
+        self.redo = option.redo
 
 
     def get_review_list(self, members):
@@ -255,65 +257,89 @@ class Gerrit(object):
         for review in self.review_list:
             self.review_detail(review)
 
+    def get_commit_hash(self, review, short=True):
+        current_patch_set = review.get('currentPatchSet', {})
+        commit = current_patch_set.get('revision', None)
+        return commit[:7] if short else commit
+        
+    def get_project(self, review):
+        return review.get('project')
+
+    def get_branch(self, review):
+        return review.get('branch')
+
+    def get_change_info(self, review, short=True):
+        c_info = {
+            'change': '',
+            'project': '',
+            'branch': '',
+            'commit': ''
+        }
+        current_patch_set = review.get('currentPatchSet', {})
+        commit = current_patch_set.get('revision', None)
+        c_info['commit'] =  commit[:7] if short else commit
+        c_info['change'] = review.get('number', '')
+        c_info['project'] = review.get('project', '').split('/')[1]
+        c_info['branch'] = review.get('branch', '')
+        return c_info
+        
     def review(self, review):
         '''
              gerrit review --code-review +2 ${change,patchset}
              gerrit review --code-review +2 $commit_id
         '''
-        current_patch_set = review.get('currentPatchSet', {})
-        commit = current_patch_set.get('revision', None)
-        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--code-review', '+2', str(commit)]
+        ci = self.get_change_info(review)
+        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--code-review', '+2', str(ci['commit'])]
         p = subprocess.Popen(cmd_recheck, stdout=subprocess.PIPE)
         p.communicate()
-
-        review_number = review.get('number', '')
-        print "%s(%s) reviewed." % (review_number, commit[:7])
+        print "%s(%s: %s) reviewed." % (ci['change'], ci['project'], ci['commit'])
 
     def recheck(self, review):
         '''
             gerrit review -m "recheck\ niv" ${change,patchset}
             gerrit review -m "recheck\ niv" $commit_id
         '''
-        current_patch_set = review.get('currentPatchSet', {})
-        commit = current_patch_set.get('revision', None)
-        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"recheck\ niv"', str(commit)]
+        ci = self.get_change_info(review)
+        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"recheck\ niv"', str(ci['commit'])]
         p = subprocess.Popen(cmd_recheck, stdout=subprocess.PIPE)
         p.communicate()
-
-        review_number = review.get('number', '')
-        print "%s(%s) rechecked." % (review_number, commit[:7])
+        print "%s(%s: %s) rechecked." % (ci['change'], ci['project'], ci['commit'])
 
     def regate(self, review):
         '''
             gerrit review -m "regate\ niv" ${change,patchset} or 
             gerrit review -m "regate\ niv" $commit
         '''
-        current_patch_set = review.get('currentPatchSet', {})
-        commit = current_patch_set.get('revision', None)
-        cmd_regate = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"regate\ niv"', str(commit)]
+        ci = self.get_change_info(review)
+        cmd_regate = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"regate\ niv"', str(ci['commit'])]
         p = subprocess.Popen(cmd_regate, stdout=subprocess.PIPE)
         p.communicate()
-
-        review_number = review.get('number', '')
-        print "%s(%s) regated." % (review_number, commit[:7])
+        print "%s(%s: %s) regated." % (ci['change'], ci['project'], ci['commit'])
 
     def workflow(self, review):
         ''' 
             gerrit review --workflow +1 ${change,patchset} or
             gerrit review --workflow +1 $commit_id
         '''
-        current_patch_set = review.get('currentPatchSet', {})
-        commit = current_patch_set.get('revision', None)
-        cmd_workflow = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--workflow', '+1', str(commit)]
+        ci = self.get_change_info(review)
+        cmd_workflow = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--workflow', '+1', str(ci['commit'])]
         p = subprocess.Popen(cmd_workflow, stdout=subprocess.PIPE)
         p.communicate()
+        print "%s(%s: %s) workflow+1." % (ci['change'], ci['project'], ci['commit'])
 
-        review_number = review.get('number', '')
-        print "%s(%s) workflow+1." % (review_number, commit[:7])
+def parse_option():
+    parser = OptionParser(description="Make query to gerrit")
+    group = OptionGroup(parser, "Debug Options")
+    group.add_option("-x", "--redo", dest="redo", action="store_true",
+                     help="Redo workflow, such as recheck, regate, workflow+1, etc.")
+    parser.add_option_group(group)
+    (options, args) = parser.parse_args()
+    return options
 
 
 def main():
-    gerrit = Gerrit()
+    op = parse_option()
+    gerrit = Gerrit(op)
     gerrit.get_review_list(team_member)
     gerrit.reviews_detail()
     # Here is_team_review can also a method from class, a example:
@@ -327,35 +353,37 @@ def main():
     # Give up of RESTful API for there was no "POST" method available.
     reviews_need_review = filter(need_review, team_reviews)
     for review_need_review in reviews_need_review:
-        review_id = review_need_review[0].get('number', None)
-        print "%s needs review." % review_id
+        ci = gerrit.get_change_info(review_need_review[0])
+        print "%s(%s: %s) needs review." % (ci['change'], ci['project'], ci['commit'])
         # gerrit.review(review_need_review[0])
-        # print "%s reviewed." % review_id
     
     # Recheck those failed to verify
     reviews_need_recheck = filter(need_recheck, team_reviews)
     for review_need_recheck in reviews_need_recheck:
-        review_id = review_need_recheck[0].get('number', None)
-        print "%s needs recheck." % review_id
-        gerrit.recheck(review_need_recheck[0])
+        ci = gerrit.get_change_info(review_need_recheck[0])
+        print "%s(%s: %s) needs recheck." % (ci['change'], ci['project'], ci['commit'])
+        if gerrit.redo:
+            gerrit.recheck(review_need_recheck[0])
 
    # Workflow +1 if all set
     reviews_need_workflow = filter(need_workflow, team_reviews)
     for review_need_workflow in reviews_need_workflow:
-        review_id = review_need_workflow[0].get('number', None)
-        print "%s needs workflow." % review_id
+        ci = gerrit.get_change_info(review_need_workflow[0])
+        print "%s(%s: %s) needs workflow." % (ci['change'], ci['project'], ci['commit'])
     reviews_can_auto_workflow = filter(can_auto_workflow, reviews_need_workflow)
     for review_can_auto_workflow in reviews_can_auto_workflow:
-        review_id = review_can_auto_workflow[0].get('number', None)
-        print "%s can auto workflow." % review_id
-        gerrit.workflow(review_can_auto_workflow[0])
+        ci = gerrit.get_change_info(review_can_auto_workflow[0])
+        print "%s(%s: %s) can auto workflow." % (ci['change'], ci['project'], ci['commit'])
+        if gerrit.redo:
+            gerrit.workflow(review_can_auto_workflow[0])
 
     # Regate those failed to workflow+1
     reviews_need_regate = filter(need_regate, team_reviews)
     for review_need_regate in reviews_need_regate:
-        review_id = review_need_regate[0].get('number', None)
-        print "%s needs regate." % review_id
-        gerrit.regate(review_need_regate[0])
+        ci = gerrit.get_change_info(review_need_regate[0])
+        print "%s(%s: %s) needs regate." % (ci['change'], ci['project'], ci['commit'])
+        if gerrit.redo:
+            gerrit.regate(review_need_regate[0])
 
 if __name__  == "__main__":
     main()
