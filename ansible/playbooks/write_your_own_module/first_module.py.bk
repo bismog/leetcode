@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from ansible.module_utils.basic import AnsibleModule
+
+def save_data(mod):
+    raise NotImplementedError
+
+def main():
+    mod = AnsibleModule(
+        argument_spec=dict(
+            url=dict(required=True),
+            dest=dict(required=False, default='/tmp/firstmod')
+        )
+    )
+
+    save_data(mod)
+
+if __name__ == "__main__":
+    main()

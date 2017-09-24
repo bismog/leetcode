@@ -1,0 +1,14 @@
+---
+- name: Verify user and group in ini_file copy
+  hosts: localhost
+  gather_facts: false
+  become: true
+  become_user: glance
+  tasks:
+    - name: template to remote
+      template:
+        dest: /etc/glance/glance.conf
+        src: glance.conf.j2
+        # owner: glance
+        # group: glance
+        force: true
