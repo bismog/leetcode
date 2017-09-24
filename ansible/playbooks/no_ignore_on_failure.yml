@@ -1,0 +1,20 @@
+---
+- hosts: centos
+  gather_facts: false
+  tasks:
+    - name: do something with failure
+      shell: >
+        echo "xxx" &&
+        xxx is a invalid command &&
+        ls /home/
+      ignore_errors: yes
+
+    - name: do something with failure too
+      shell: |
+        echo "xxx" &&
+        zzz is a invalid command too &&
+        ls /home/
+
+    - name: continue to do other things
+      shell:
+        echo 'hello, hello...' 

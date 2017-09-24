@@ -1,0 +1,7 @@
+---
+- hosts: centos
+  tasks:
+  - name: say hello
+    command: echo "hello"
+  - name: say hello
+    command: echo "world"
