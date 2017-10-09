@@ -1,0 +1,5 @@
+---
+# - hosts: random-choose
+#   tasks:
+- name: declare level 3
+  command: echo 'This is level 3'

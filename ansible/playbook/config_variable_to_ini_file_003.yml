@@ -1,0 +1,54 @@
+---
+- name: Add host to group 'conf_node'
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars_files:
+    - "osconf.json"
+  tasks:
+    - add_host:
+        groups: conf_node
+        hostname: "{{ nodes }}"
+        ansible_host: "{{ nodes }}"
+        ansible_host_name: "{{ nodes }}"
+        ansible_ssh_user: "root"
+        ansible_ssh_pass: "{{ password }}"
+        ansible_python_interpreter: python
+
+- name: Config variable on remote node
+  hosts: conf_node
+  gather_facts: false
+  vars_files:
+    - "osconf.json"
+  tasks:
+    - name: Update conf file
+#       vars:
+#         conf_file: item.value["conf"]
+#         conf_section: item.value["section"]
+#         conf_item: item.value["item"]
+#         conf_value: item.value["value"]
+#         ovalue: "{{ lookup('ini', '{{ conf_item }} section={{ conf_section }} file={{ conf_file }}') }}"
+      ini_file:
+        path: "{{ conf }}"
+        section: "{{ section }}"
+        option: "{{ item }}"
+        value: "{{ value }}"
+        state: "{{ (operation == 'remove') | ternary('absent', 'present') }}"
+     
+    - name: Restart conf relate services
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+      with_items: "{{ services }}"
+
+- name: Remove a item from ini file
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - ini_file:
+        path: "lookup_variable_from_ini_file.ini"
+        section: "default"
+        option: "delay"
+        state: absent 
+...

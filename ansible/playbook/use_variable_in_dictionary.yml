@@ -1,0 +1,32 @@
+---
+- name: add hosts to group
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - "/home/refer/daisy/tecs.json"
+  vars:
+    develop_branch:
+      "dev": "xyz"
+      "p1": "abc"
+      "master": "123"
+    branch: "p1"
+  connection: local
+  tasks:
+    - name: add ha_ip
+      add_host:
+        groups: ha_ip
+        name: "{{ HA_IP }}"
+        hostname: "{{ HA_IP }}"
+        ansible_host_name: "{{ HA_IP }}"
+        ansible_ssh_user: '{{ HOSTS[HA_NAMES[0]]["USER"] }}'
+        ansible_ssh_pass: '{{ HOSTS[HA_NAMES[0]]["PASSWORD"] }}'
+        ansible_python_interpreter: python
+
+    - name: debug output
+      debug: msg="{{ HA_NAMES[0] }}"
+
+    - name: debug output
+      debug: msg="{{ ansible_ssh_user }}"
+
+    - name: debug output
+      debug: msg="{{ develop_branch[branch] }}"

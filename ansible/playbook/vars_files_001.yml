@@ -1,0 +1,32 @@
+- name: config rc file
+  hosts: debughost
+  vars_files:
+    - vars.json
+  vars:
+    openstack_host: "{{ inventory_hostname }}"
+    openstack_user: "{{ key1.{{ inventory_hostname }} }}"
+#    openstack_user: "{{ key1['{{ inventory_hostname }}' ] }}"
+#    openstack_user: "{{ key1['10.43.20.211'] }}"
+#    openstack_user: "{{ key1['10.43.20.211'] }}"
+    openstack_user: "tecs"
+    PUBLIC_IP: "10.20.30.40"
+  remote_user: "{{ openstack_user }}"
+  become: true
+  become_user: "{{ openstack_user }}"
+  gather_facts: false
+  strategy: free
+  tasks:
+    - name: Display Variable
+      debug: msg="{{ openstack_user }}"
+      ignore_errors: yes
+
+#     - name: do what ...
+#       shell: echo " host is {{ openstack_host }}"
+#       copy:
+#         src: /home/git/daisy/backend/tecs/ansible/keystonerc_admin.j2
+#         dest: /home/{{ openstack_user }}/keystonerc_admin
+#         owner: "{{ openstack_user }}"
+#         group: "{{ openstack_user }}"
+#         mode: 0666
+#         force: yes
+  tags: rc_file

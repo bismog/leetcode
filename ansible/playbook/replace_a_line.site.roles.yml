@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: false
+  roles: 
+     - apache
+
+#   tasks:
+#     - include: roles/apache/tasks/mail.yml
+# - name: replace httpd.conf configuration

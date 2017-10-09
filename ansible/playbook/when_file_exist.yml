@@ -1,0 +1,19 @@
+---
+- name: Update file content when file exist
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Get stat of file /etc/php.ini
+      stat:
+        path: /etc/php.ini
+      register: php_conf_file
+  
+    - name: Don't expose php server
+      ini_file:
+        path: /etc/php.ini
+        section: PHP
+        option: expose_php
+        value: Off
+        state: present
+        backup: yes
+      when: php_conf_file.stat.exists == True

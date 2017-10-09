@@ -1,0 +1,22 @@
+---
+- name: if else condition
+  hosts: localhost
+  gather_facts: false
+  tasks:
+#    - name: ternary usage
+#      vars:
+#        user: "rootroot"
+#        keystone_rc_dir: "{{ (user == 'root') | ternary('/root', '/home/xxx') }}"
+#      debug: msg={{ keystone_rc_dir }}
+
+    - name: set prefix directory
+      vars:
+        user: "root"
+        home_dir: "{{ (user == 'root') | ternary('', '/home') }}/{{ user }}"
+#        prefix:  "{{ (user == 'root') | ternary('/', '/home/') }}"
+#        keystone_rc_dir: "{{ prefix }}{{ user }}"
+        destdir: "{{ home_dir }}/keystonerc_admin"
+      debug: msg={{ home_dir }}
+#       copy:
+#         src: vars.json
+#         dest: "{{ home_dir }}/keystonerc_admin"

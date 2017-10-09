@@ -1,0 +1,28 @@
+{
+    "nodes": [
+        {
+            "host": "host-46",
+            "ip": "10.43.203.46",
+            "psd": "ossdbg1",
+            "usr": "root"
+        },
+        {
+            "host": "host-172",
+            "ip": "10.43.203.172",
+            "psd": "ossdbg1",
+            "usr": "root"
+        },
+        {
+            "host": "host-158",
+            "ip": "10.43.174.158",
+            "psd": "ossdbg1",
+            "usr": "root"
+        },
+        {
+            "host": "host-132",
+            "ip": "10.43.203.132",
+            "psd": "ossdbg1",
+            "usr": "tecs"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+c query service_name
+Check the state of a service
+YYYYYYYYYYYYYYYYY
+ls -d### .??*
+List only hidden files
+2**014-1-17 11:19
+grep -o PATTERN
+-o only the good matched parts
+

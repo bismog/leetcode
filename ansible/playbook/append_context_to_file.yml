@@ -1,0 +1,22 @@
+---
+- name: append context to file
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: replace httpd.conf
+      lineinfile:
+        path: /tmp/httpd.conf
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      with_items:
+        - { regexp: '^ServerTokens', line: 'ServerTokens Prod' }
+        - { regexp: '^ServerSignature', line: 'ServerSignature Off' }
+        - { regexp: '^TraceEnable', line: 'TraceEnable Off' }
+        - { regexp: '^(\s*Options)', line: '\1 FollowSymlinks' }
+#     - name: appending context
+#       lineinfile:
+#         path: /tmp/file_to_be_append.txt
+#         insertafter: EOF
+#         state: present
+# #         line: "line to be append"
+#         line: "{{ lookup('file', '/tmp/append_context.txt') }}" 

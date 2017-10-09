@@ -1,0 +1,13 @@
+---
+- name: whatever you like
+  command: ls /home;echo "alright!"
+
+- name: copy a file too
+  copy:
+    src: /etc/ssh/ssh_config
+    dest: /tmp/ssh_config
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  

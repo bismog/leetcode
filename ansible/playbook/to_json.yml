@@ -1,0 +1,33 @@
+---
+# https://github.com/ansible/ansible/issues/10347
+- hosts: localhost
+  gather_facts: false
+  vars:
+    - volume_ids:
+      - 'abc'
+      - 'def'
+      - 'ghi'
+  tasks:
+    - name: "{{volume_ids|to_json}}"
+      debug: msg="{{volume_ids|to_json}}"
+
+    - name: To nice json and write to local file
+      local_action:
+        copy content="{{ volume_ids | to_nice_json }}" dest="/tmp/to_nice_json.json"
+
+    - name: again with set_fact
+      vars:
+        val_bbb: "222"
+        val_ccc_1: 121
+        val_ccc_2: "{{ val_ccc_1 }}"
+      set_fact:
+        volume_ids_fact:
+          aaa: "111"
+          bbb: "{{ val_bbb }}"
+          ccc:
+            - "{{ val_ccc_1 }}"
+            - "{{ val_ccc_2 }}"
+
+    - name: output with json format
+      local_action:
+        copy content="{{ volume_ids_fact | to_json }}" dest="/tmp/to_json_2.json"

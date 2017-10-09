@@ -1,0 +1,84 @@
+---
+- name: prepare hosts group
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - tecs.copy.json
+  connection: local
+  tasks:
+    - name: add ha host
+      set_fact:
+        ansible_host_name: "{{ item.key }}"
+      with_dict: "{{ HA_HOSTS }} "
+
+    - name: dfasdfas
+      add_host:
+        groups: ha_nodes
+        hostname: "{{ item.key }}"
+        ansible_host: "{{ item.value['IP'] }}"
+#        ansible_host_name: "{{ item.key }}"
+        ansible_ssh_user: "{{ item.value['USER'] }}"
+        ansible_ssh_pass: "{{ item.value['PASSWORD'] }}"
+        ansible_python_interpreter: python
+      with_dict: "{{ HA_HOSTS }} "
+    - name: add lb host
+      add_host:
+        groups: lb_nodes
+        hostname: "{{ item }}"
+        ansible_host: "{{ HOSTS[item]['IP'] }}"
+        ansible_ssh_user: "{{ HOSTS[item]['USER'] }}"
+        ansible_ssh_pass: "{{ HOSTS[item]['PASSWORD'] }}"
+        ansible_python_interpreter: python
+      with_items: "{{ LB_NAMES }} "
+
+- name: do sth
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: debug output
+      debug: msg="{{ ansible_host_name }}"
+
+    - name: debug output
+      debug: msg="{{ ansible_ssh_user }}"
+
+    - name: debug output
+      debug: msg="{{ ansible_ssh_pass }}"
+
+# - name: keystone runcom file for root user and group
+#   hosts: lb_nodes
+#   vars_files:
+#     - tecs.copy.json
+#   gather_facts: false
+#   remote_user: root
+#   strategy: free
+#   tasks:
+#     - name: generate keystone rc file
+#       template:
+#         src: keystonerc_admin.j2
+#         dest: /root/keystonerc_admin.tryit
+#         owner: root
+#         group: root
+#         mode: 0666
+#         force: yes
+#   tags: rc_file_for_root
+
+
+# - name: keystone runcom file
+#   hosts: lb_nodes
+#   vars_files:
+#     - tecs.copy.json
+#   gather_facts: false
+#   become: true
+#   become_user: "{{ ansible_ssh_user }}"
+#   strategy: free
+#   tasks:
+#     - name: generate keystone rc file
+#       template:
+#         src: keystonerc_admin.j2
+#         dest: /home/{{ ansible_ssh_user }}/keystonerc_admin.tryit
+#         owner: "{{ ansible_ssh_user }}"
+#         group: "{{ ansible_ssh_user }}"
+#         mode: 0666
+#         force: yes
+#   tags: rc_file

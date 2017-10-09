@@ -1,0 +1,26 @@
+{
+    "conf": "/etc/xxx/xxx.conf",
+    "item": "delay",
+    "nodes": "10.43.174.158",
+    "operation": "update",
+    "password": "ossdbg1",
+    "section": "default",
+    "services": [
+    ],
+    "value": 333
+}
+# {
+#     "os_config": {
+#         "conf": "/etc/xxx/xxx.conf",
+#         "item": "delay",
+#         "nodes": "10.43.174.158",
+#         "operation": "query",
+#         "password": "ossdbg1",
+#         "section": "default",
+#         "services": [
+#             "service-a",
+#             "service-b"
+#         ],
+#         "value": "1000"
+#     }
+# }

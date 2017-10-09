@@ -1,0 +1,11 @@
+---
+- name: Lookup variable from remote ini file
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+   - name: ...
+     vars:
+       svalue: "{{ lookup('ini', 'delay section=default file=lookup_variable_from_ini_file.ini') }}"
+     debug: msg="{{ svalue }}"
+     

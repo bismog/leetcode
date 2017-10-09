@@ -9,7 +9,7 @@ typedef struct {
 
 #define ALEN  5
 
-int main()
+int ex1()
 {
     T_abc t1[ALEN], t2[ALEN];
     int i; 
@@ -27,5 +27,28 @@ int main()
         printf("t2.%d.b: 0x%x\n", i, t2[i].b);
         printf("t2.%d.c: 0x%x\n", i, t2[i].c);
     }
+    return ;
+}
+
+int ex2()
+{
+    T_abc t1[ALEN];
+    int i;
+    memset(t1, 0x5a, sizeof(T_abc)*ALEN);
+    memset(&(t1[3]), 0x77, sizeof(T_abc));
+
+    for(i=0; i<ALEN; i++) {
+        printf("t1.%d.a: 0x%x\n", i, t1[i].a);
+        printf("t1.%d.b: 0x%x\n", i, t1[i].b);
+        printf("t1.%d.c: 0x%x\n", i, t1[i].c);
+    }
+    
+}
+
+int main()
+{
+    ex1();
+    printf("\n");
+    ex2();
     return ;
 }

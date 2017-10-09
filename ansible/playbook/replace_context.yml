@@ -1,0 +1,11 @@
+---
+- name: append context to file
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: appending context
+      lineinfile:
+        path: /tmp/file_to_be_append.txt
+        regexp: "line to be append"
+        line: "LINE TO BE APPEND"
+#        line: "{{ lookup('file', '/tmp/append_context.txt') }}" 

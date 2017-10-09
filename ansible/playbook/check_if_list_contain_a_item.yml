@@ -1,0 +1,18 @@
+---
+- name: check if a item exists in a list
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - check_if_list_contain_a_item.json
+  tasks:
+    - name: checking
+      vars:
+        component_x: "nova"
+      debug: msg="yes, I found {{ component_x }} in DB_COMPONENTS"
+      # when for a string item, we can put all of this in '...' to make yaml parser happy
+      # https://www.reddit.com/r/ansible/comments/2wsosa/how_can_i_use_when_item_in_list_as_a_conditional/
+      when: '"nova" in DB_COMPONENTS'
+      # Or we can do following for a variable item
+      # https://stackoverflow.com/questions/28080145/check-if-a-list-contains-an-item-in-ansible
+      # when: component_x in DB_COMPONENTS

@@ -1,0 +1,7 @@
+---
+- name: can key word be used as normal variable?
+  hosts: debughost
+  gather_facts: true
+  tasks:
+    - name: show hostvars
+      debug: msg="{{ hostvars[inventory_hostname] }}"

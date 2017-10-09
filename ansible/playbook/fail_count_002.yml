@@ -1,0 +1,13 @@
+---
+- name: sdfasdfas
+  hosts: liyuying
+  gather_facts: false
+  tasks:
+    - name: start httpd
+      systemd:
+        name: httpd
+        state: stopped
+    - name: stop httpd
+      systemd:
+        name: httpd
+        state: started

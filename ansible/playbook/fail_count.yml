@@ -1,0 +1,17 @@
+---
+- hosts: liyuying
+  gather_facts: false
+  tasks:
+    - name: xxxxxxxxx
+      command: echo {{ item }}
+      with_items:
+        - 'gggggggg'
+        - 'hhhhhhhh'
+        - 'uuuuuuuu'
+
+    - name: zzzzzzzzz
+      command: xxx_{{ item }}
+      with_items:
+        - 'gggggggg'
+        - 'hhhhhhhh'
+        - 'uuuuuuuu'

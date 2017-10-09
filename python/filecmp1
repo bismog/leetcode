@@ -1,0 +1,10 @@
+#see_also http://blog.chinaunix.net/uid-25525723-id-335164.html 
+#!/usr/bin/python 
+import difflib
+#from difflib import Differ 
+
+diff = difflib.Differ().compare( 
+    open('a.txt','rt').readlines(), 
+    open('b.txt','rt').readlines() 
+    ) 
+print '\n'.join(list(diff)) 

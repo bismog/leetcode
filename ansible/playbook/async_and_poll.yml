@@ -1,0 +1,11 @@
+---
+- name: asynchronous actions and polling
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: restart service colord
+      systemd:
+        name: colord
+        state: restarted
+      async: 45
+      poll: 10

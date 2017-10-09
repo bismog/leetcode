@@ -1,0 +1,82 @@
+#  ---
+#  - name: Obtaining a list of Jenkins Plugins
+#    hosts: localhost
+#    connection: local
+#    gather_facts: false
+#    tasks:
+#      - name: 'loop vars'
+#        vars:
+#          compute_ip: ""
+#        set_fact:
+#          compute_ip: "{{ item }};{{ compute_ip }}"
+#        with_items:
+#          - '10.20.30.40'
+#          - '1.2.3.4'
+#          - '192.168.1.1'
+#  
+#      - name: debug output
+#        debug: msg="{{ compute_ip }}"
+#  #      vars: 
+#  #        compute_ip: "{{ compute_ip }}-{{ item  }}"
+---
+- name: dfasdfasdfasdfasdfas
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: define cinder controller ip
+#      The following commented method also works:
+#      vars:
+#        cinder_controller_ip: ""
+#      set_fact:
+#        cinder_controller_ip: "{{ item }};{{ cinder_controller_ip }}"
+#      with_items:
+#        - '10.20.30.40'
+#        - '1.2.3.4'
+#        - '192.168.1.1'
+      vars:
+        control_ips:
+          - '10.20.30.40'
+          - '1.2.3.4'
+          - '192.168.1.1'
+      set_fact:
+        cinder_controller_ip: "{{ control_ips | join(';') }}"
+#      debug: msg="{{ cinder_controller_ip }}"
+        
+    - name: define cinder computer ip
+#      The following commented method also works:
+#      vars:
+#        cinder_computer_ip: ""
+#       set_fact:
+#         cinder_computer_ip: "{{ item }};{{ cinder_computer_ip }}"
+#      with_items:
+#        - '40.30.20.10'
+#        - '4.3.2.1'
+#        - '1.1.168.192'
+      vars:
+        compute_ips:
+          - '10.20.30.40'
+          - '1.2.3.4'
+          - '192.168.1.1'
+      set_fact:
+        cinder_computer_ip: "{{ compute_ips | join(';') }}"
+#      debug: msg="{{ cinder_computer_ip }}"
+
+    - name: update cinder controller ip to cinder config file
+      ini_file:
+        dest: /tmp/cinder.conf
+        section: DEFAULT
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+      with_items:
+        - {"option":"control_ip", "value":"{{ cinder_controller_ip }}"}
+
+    - name: update cinder computer ip to cinder config file
+      ini_file:
+        dest: /tmp/cinder.conf
+        section: DEFAULT
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+      with_items:
+        - {"option":"compute_ip", "value":"{{ cinder_computer_ip }}"}
+...

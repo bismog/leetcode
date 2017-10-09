@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+# https://stackoverflow.com/questions/773/how-do-i-use-pythons-itertools-groupby
+from itertools import groupby
+
+things = [("animal", "bear"), ("animal", "duck"), ("plant", "cactus"), ("vehicle", "speed boat"), ("vehicle", "school bus")]
+
+for key, group in groupby(things, lambda x: x[0]):
+    for thing in group:
+        print "A %s is a %s.(%s)" % (thing[1], key, thing[0])
+    print " "

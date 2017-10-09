@@ -6,7 +6,7 @@
 # Created by chml
 
 import BaseHTTPServer,SocketServer, cgi
-from os import curdir,sep, path
+from os import curdir,sep, path, chmod
 
 uploadhtml='''<html><body>
 <p>上传RPM包到TECS版本服务器</p>
@@ -50,6 +50,7 @@ class WebHandler(BaseHTTPServer.BaseHTTPRequestHandler):
            upfile.close()
            file_len = len(file_data)
            del file_data
+           chmod(file_name, 0755)
            self.wfile.write('文件 <a href="%s">%s</a> 成功上传，大小为：%d bytes<br/>' % (file_name,file_name,file_len))
 
 

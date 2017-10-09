@@ -1,0 +1,14 @@
+---
+- name: base play book of roles
+  hosts: random-choose
+  tasks:
+    - name: copy to temp
+      copy:
+        src: /etc/ssh/ssh_config
+        dest: /tmp/ssh_config
+        owner: root
+        group: root
+        mode: 0644
+
+  roles:
+    - xxx

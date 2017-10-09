@@ -1,0 +1,8 @@
+---
+- name: directory
+  hosts: localhost
+  tasks:
+    - name: make sure a directory exist
+      file:
+        state: directory
+        path: /home/xxx

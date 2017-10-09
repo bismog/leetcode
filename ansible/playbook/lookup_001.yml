@@ -1,0 +1,18 @@
+---
+- name: try lookup file
+  hosts: debughost
+  gather_facts: false
+  vars:
+    json_contents: "{{ lookup('file', '/home/refer/daisy/ansible_discovery.json') }}"
+    yaml_contents: "{{ lookup('file', '/home/refer/daisy/site.yml')  }}"
+    local_home: "{{ lookup('env', 'HOME') }}"
+  tasks:
+#    - name: debug show json contents
+#      debug: msg="{{ json_contents | to_nice_json }}"
+##      debug: msg="{{ json_contents | to_json }}"
+#
+#     - name: debug show yaml contents
+#       debug: msg="{{ yaml_contents | to_yaml }}"
+
+     - name: debug show variable
+       debug: msg="{{ local_home }}"

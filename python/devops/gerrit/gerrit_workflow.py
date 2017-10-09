@@ -5,7 +5,7 @@ import subprocess
 import json
 from optparse import OptionParser, OptionGroup
 
-EXCLUDED_CHANGE=['286481',]
+EXCLUDED_CHANGE=[]
 
 # Not include QA for QA may has many issue state as 'to-be-verified' to 
 # manage, it would be a large of noise
@@ -57,7 +57,9 @@ def get_review_code_review_state(review):
     
 def get_review_verified_state(review):
     # import pdb;pdb.set_trace()
-    all_approvals = review['currentPatchSet']['approvals']
+    all_approvals = review['currentPatchSet'].get('approvals', [])
+    if not all_approvals:
+        return []
     all_verified_states = []
     for approval in all_approvals:
         if approval.get('type', "") == "Verified":
@@ -110,7 +112,6 @@ class Gerrit(object):
         self.review_list = []
         self.review_data = []
         self.redo = option.redo
-
 
     def get_review_list(self, members):
         owner_list = ['o:'+ow for ow in members]
@@ -365,7 +366,7 @@ def main():
         if gerrit.redo:
             gerrit.recheck(review_need_recheck[0])
 
-   # Workflow +1 if all set
+    # Workflow +1 if all set
     reviews_need_workflow = filter(need_workflow, team_reviews)
     for review_need_workflow in reviews_need_workflow:
         ci = gerrit.get_change_info(review_need_workflow[0])

@@ -1,0 +1,10 @@
+---
+- name: replace a line
+  host: localhost
+  gather_facts: false
+  tasks:
+    - name: match and replace
+      lineinfile:
+        path: /tmp/file_to_be_append.txt
+        regexp: "line 4"
+        line: 

@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: some command
+      shell: "ls {{ item }}"
+      with_items:
+        - "/xxx/xxx/xxx"
+        - "/yyy/yyy/yyy"
+        - "/zzz/zzz/zzz"
+      retries: 2
+      delay: 1
+      register: result
+      until: result | succeeded
+
+
+#      register: xxx_result
+#    - name: retrying
+#      command: exit 1
+#       with_sequence: count=2
+#       when: xxx_result | failed
+
+#    - name: start xxx service
+#      systemd:
+#        name: colord
+#        state: started
+
+#     - name: echo xxx_result
+#       command: echo xxx_result.stdout
+#         until: xxx_result.rc == 0
+# #        register: systemd_result
+# #        until: systemd_result.rc == 0
+#         retries: 5
+#         delay: 2
+#         ignore_errors: yes

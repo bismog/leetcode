@@ -1,0 +1,39 @@
+---
+- name: can key word be used as normal variable?
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: add hosts
+      add_host:
+        groups: roseguard
+        hostname: "{{ item.host }}"
+        ansible_ssh_user: "{{ item.user }}"
+        ansible_ssh_pass: "{{ item.password }}"
+      with_items:
+        - { "host":"chenxueying", "user":"tecs", "password":"ossdbg1" }
+        - { "host":"liyuying", "user":"tecs", "password":"ossdbg1" }
+  tags: add_hosts
+
+- name: do something
+  hosts: roseguard,!localhost
+  gather_facts: false
+  vars:
+    os_user: "{{ ansible_ssh_user }}"
+  remote_user: root
+  tasks:
+    - name: execute sth
+      command: "echo 'hello' > /root/xxx"
+
+    - name: do sth 1.1
+      debug: msg="{{ inventory_hostname }}"
+
+#    - name: do sth 1.2
+#      debug: msg="{{ hostvars[inventory_hostname] }}"
+
+    - name: "do sth 2"
+      debug: msg="{{ ansible_user }}"
+#      debug: msg="{{ ansible_ssh_user }}"
+
+    - name: "do sth 3"
+      debug: msg="{{ os_user }}"
+         

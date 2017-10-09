@@ -1,0 +1,47 @@
+---
+- name: add hosts to group
+  hosts: localhost
+  vars_files:
+    - add_host_002.json
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: add hostxxx
+      add_host:
+        groups: hostxxx
+        hostname: "{{ HA_IP }}"
+        ansible_host: "{{ HA_IP }}"
+        ansible_host_name: "{{ HA_IP }}"
+        ansible_ssh_user: "{{ item.value['USER'] }}"
+        ansible_ssh_pass: "{{ item.value['PASSWORD'] }}"
+        ansible_python_interpreter: python
+      with_dict: "{{ HA_HOSTS }}"
+
+# It seems debug will not login into target node and do debug 
+# even we set hosts to be a non-localhost group
+# - name: "show facts on dest node"
+#   hosts: hostxxx
+#   gather_facts: false
+#   connection: local
+#   tasks: 
+#     - name: debug ansible_host
+#       debug: msg="{{ ansible_host }}"
+# 
+#     - name: debug ansible_host_name
+#       debug: msg="{{ ansible_host_name }}"
+# 
+#     - name: debug ansible_ssh_user
+#       debug: msg="{{ ansible_ssh_user }}"
+#       # debug: msg="this is a big world."
+# 
+#     - name: debug ansible_ssh_pass
+#       debug: msg="{{ ansible_ssh_pass }}"
+
+- name: run shell scripts
+  hosts: hostxxx
+#   become: true
+  gather_facts: false
+  strategy: free
+  tasks:
+    - name: run
+      shell: echo 'xxx'

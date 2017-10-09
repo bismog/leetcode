@@ -1,0 +1,8 @@
+import os
+def walk_dir(dirname):
+	for root,dirs,files in os.walk(dirname):
+		for f in files:
+			yield os.path.join(root, f)
+                        print(root[1]+dirs[1]+f[1])
+
+walk_dir("/home/chml")

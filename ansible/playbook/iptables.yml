@@ -1,0 +1,8 @@
+---
+- name: iptables handling
+  hosts: chenxueying
+  gather_facts: false
+  become: true
+  roles:
+    - iptables
+#      sudo: true

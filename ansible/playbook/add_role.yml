@@ -1,0 +1,9 @@
+---
+- name: add role
+  hosts: host106
+  gather_facts: false
+  tasks:
+    - name: add role heat_stack_owner
+      os_keystone_role:
+        name: heat_stack_owner
+        state: present

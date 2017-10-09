@@ -1,0 +1,1 @@
+auth_host => "%(CONFIG_CONTROLLER_HOST)s"

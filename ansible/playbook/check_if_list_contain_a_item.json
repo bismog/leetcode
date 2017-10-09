@@ -1,0 +1,19 @@
+{
+  "DB_COMPONENTS": [
+    "camellia",
+    "ironic",
+    "ceilometer",
+    "heat",
+    "neutron",
+    "nova",
+    "zabbix",
+    "aodh",
+    "keystone",
+    "cinder",
+    "glance"
+  ],
+  "COMPUTE_NAMES": [
+    "computer41",
+    "computer40"
+  ]
+}

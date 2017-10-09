@@ -1,0 +1,49 @@
+---
+- name: Create ssh mutual authorization between multiple nodes
+  hosts: localhost
+  vars_files: 
+    - "{{ json_file }}"
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Add nodes to 'dest_all' group
+      add_host:
+        groups: cluster_nodes
+        name: "{{ item['ip'] }}"
+        hostname: "{{ item['host'] }}"
+        ansible_host_name: "{{ item['host'] }}"
+        ansible_ssh_user: "{{ item['usr'] }}"
+        ansible_ssh_pass: "{{ item['psd'] }}"
+      with_items: "{{ nodes }}"
+
+- name: debug msg
+  hosts: cluster_nodes
+  gather_facts: false
+  tasks:
+    - debug: msg="{{ ansible_host_name }}"      
+
+- name: Fetch public key
+  hosts: cluster_nodes
+  gather_facts: false
+  tasks:
+    - fetch:
+        src: "~/.ssh/id_rsa.pub"
+        dest: "/tmp/{{ ansible_host_name }}_id_rsa.pub"
+        flat: yes
+
+- name: copy public key to remote target, append to file ~/.ssh/authorized_keys
+  hosts: cluster_nodes
+  vars_files:
+   - "{{ json_file }}"
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Do with module authorized_key
+      vars:
+        prefix: "{{ item['host'] }}"
+      authorized_key:
+        user: "{{ item['usr'] }}"
+        key: "{{ lookup('file', '/tmp/{{ prefix }}_id_rsa.pub') }}"
+        manage_dir: no
+      with_items: "{{ nodes }}"
+...

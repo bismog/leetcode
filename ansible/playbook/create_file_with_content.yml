@@ -1,0 +1,19 @@
+---
+- name: create a file with content from scratch
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: make sure group neutron exist
+      group:
+        name: neutron
+        state: present
+
+    - name: generate dnsmasq-neutron.conf
+      copy:
+        content: "dhcp-option-force=26,1400"
+        dest: /etc/neutron/dnsmasq-neutron.conf
+        owner: root
+        group: neutron
+        mode: 0640
+        force: yes
+

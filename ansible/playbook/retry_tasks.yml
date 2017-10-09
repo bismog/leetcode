@@ -1,0 +1,9 @@
+---
+- hosts: random-choose
+  tasks:
+    - shell: exit 1
+      register: task_result
+      until: task_result.rc == 0
+      retries: 5
+      delay: 2
+#      ignore_errors: yes

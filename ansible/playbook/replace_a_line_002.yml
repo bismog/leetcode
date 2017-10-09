@@ -1,0 +1,23 @@
+---
+- name: Work around security scanning issues of httpd.service
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: replace security configuration
+      lineinfile:
+        path: /tmp/httpd.conf.217
+        backup: yes
+        regexp: '{{ item.regexp }}'
+        state: present
+        line: '{{ item.line }}'
+      with_items:
+        - { regexp: '^ServerTokens', line: 'ServerTokens Prod' }
+        - { regexp: '^ServerSignature', line: 'ServerSignature Off' }
+        - { regexp: '^TraceEnable', line: 'TraceEnable Off' }
+
+    - name: no indexes options
+      replace:
+        path: /tmp/httpd.conf.217
+        backup: yes
+        regexp: '^(\s*Options.*)(Indexes\s*)(.*)'
+        replace: '\1\3'

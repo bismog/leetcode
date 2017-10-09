@@ -1,0 +1,10 @@
+---
+- name: dfasdfasdfasd
+  hosts: localhost
+  gather_facts: false
+  vars:
+    # You can try by change value to any one of 'true, True, False, false, yes, no, Yes, No, 123, abc, ...'
+    - some_variable: Yes
+  tasks:
+    - debug: msg="some_variable is a boolean, and it's true"
+      when: some_variable | bool

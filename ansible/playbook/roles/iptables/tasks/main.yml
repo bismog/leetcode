@@ -1,0 +1,16 @@
+---
+- name: iptables rules
+  command: /sbin/iptables -P INPUT ACCEPT  
+
+- name: iptables rules save
+  command: /sbin/service iptables save
+
+- name: start iptable_tools service
+  systemd:
+    name: iptable_tools
+    state: started
+    enabled: yes
+  retries: 3
+  delay: 2
+  register: result
+  until: result | succeeded

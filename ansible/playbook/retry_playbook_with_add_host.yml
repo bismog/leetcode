@@ -1,0 +1,39 @@
+---
+- name: add hosts to group
+  hosts: localhost
+  gather_facts: false
+
+  connection: local
+  tasks:
+    - name: add hostx
+      add_host:
+        groups: hostx
+        name: "10.43.174.158"
+        ansible_ssh_host: "10.43.174.158"
+        ansible_ssh_user: root
+        ansible_ssh_pass: ossdbg1
+        ansible_python_interpreter: python
+    - name: add hostz
+      add_host:
+        groups: hostz
+        name: "10.43.174.159"
+        ansible_ssh_host: "10.43.174.159"
+        ansible_ssh_user: root
+        ansible_ssh_pass: ossdbg1
+        ansible_python_interpreter: python
+
+- name: run shell scripts
+  hosts: hostx,hostz
+  remote_user: root
+  become: true
+  become_user: root
+  gather_facts: false
+  strategy: free
+  tasks:
+    - name: run
+      shell: exit 1
+      register: task_result
+      until: task_result.rc == 0
+      retries: 5
+      delay: 2
+      ignore_errors: no

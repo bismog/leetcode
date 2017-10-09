@@ -1,0 +1,7 @@
+---
+- hosts: random-choose
+  tasks:
+    - name: declare level 0
+      command: echo 'This is level 0'
+    - name: will call level 1 include
+      include: include_level_1.yml

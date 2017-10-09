@@ -1,0 +1,34 @@
+---
+- name: add hosts to group
+  hosts: localhost
+  gather_facts: false
+
+  connection: local
+  tasks:
+    - name: add hostx
+      add_host:
+        groups: hostx
+        name: liyuying
+        ansible_ssh_host: liyuying
+        ansible_ssh_user: root
+        ansible_ssh_pass: ossdbg1
+        ansible_python_interpreter: python
+    - name: add hostz
+      add_host:
+        groups: hostz
+        name: "10.43.174.159"
+        ansible_ssh_host: "10.43.174.159"
+        ansible_ssh_user: root
+        ansible_ssh_pass: ossdbg1
+        ansible_python_interpreter: python
+
+- name: run shell scripts
+  hosts: liyuying, hostz
+  remote_user: root
+  become: true
+  become_user: root
+  gather_facts: false
+  strategy: free
+  tasks:
+    - name: run
+      shell: echo 'xxx'

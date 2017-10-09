@@ -1,0 +1,14 @@
+#compare two string, no matter CASE/TAB/CHANGE LINE
+#!/usr/bin/python
+a = " \t\n\n a B C d\t\n\n\n" 
+b = "\t\t\n\n a b c D\n\n\n\n" 
+s1 = a.lower() 
+s1 = ' '.join(s1.split()) 
+s2 = b.lower() 
+s2 = ' '.join(s2.split()) 
+print "s1 is",s1
+print "s2 is",s2
+if s1 == s2: 
+    print "==" 
+else: 
+    print "!="

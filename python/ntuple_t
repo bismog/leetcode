@@ -1,0 +1,13 @@
+import collections
+Person=collections.namedtuple('Person','name age gender')
+print'Type of Person:',type(Person)
+
+Bob=Person(name='Bob',age=30,gender='male')
+print'Representation:',Bob
+
+Jane=Person(name='Jane',age=29,gender='female')
+
+print'Field by Name:',Jane.name
+
+for people in[Bob,Jane]:
+    print"%s is %d years old %s" % people

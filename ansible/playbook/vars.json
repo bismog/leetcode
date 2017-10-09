@@ -1,0 +1,10 @@
+{
+    "key1": {
+            "chenxueying": "tecs",
+            "liyuying": "tecs"
+    },
+    "key2": [
+        "chenxueying",
+        "liyuying"
+    ]
+}

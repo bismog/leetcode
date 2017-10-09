@@ -1,0 +1,19 @@
+{
+    "HA_HOSTS": {
+        "controller1": {
+            "IP": "10.43.203.46",
+            "PASSWORD": "ossdbg1",
+            "USER": "tecs"
+        },
+        "controller2": {
+            "IP": "10.43.211.56",
+            "PASSWORD": "ztescs",
+            "USER": "root"
+        }
+    },
+    "HA_IP": "10.43.203.46",
+    "HA_SERVICES": [],
+    "NTP_SERVERS": [
+        "ha-vip"
+    ]
+}

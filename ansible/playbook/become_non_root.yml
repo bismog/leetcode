@@ -1,0 +1,16 @@
+- name: config rc file
+  hosts: chenxueying
+  remote_user: tecs
+  become: true
+  become_user: tecs
+  gather_facts: false
+  strategy: free
+  tasks:
+    - copy:
+        src: /home/git/daisy/backend/tecs/ansible/keystonerc_admin.j2
+        dest: /home/tecs/keystonerc_admin
+        owner: tecs
+        group: tecs
+        mode: 0666
+        force: yes
+  tags: rc_file

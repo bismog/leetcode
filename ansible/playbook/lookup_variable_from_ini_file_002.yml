@@ -1,0 +1,36 @@
+---
+- name: Add host to group 'conf_node'
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars_files:
+    - "osconf.json"
+  tasks:
+    - name: add host
+      add_host:
+        groups: conf_node
+#         hostname: "{{ item['node'] }}"
+#         ansible_host: "{{ item['node'] }}"
+#         ansible_host_name: "{{ item['node'] }}"
+        hostname: "{{ nodes }}"
+        ansible_host: "{{ nodes }}"
+        ansible_host_name: "{{ nodes }}"
+        ansible_ssh_user: "root"
+        ansible_ssh_pass: "{{ password }}"
+        ansible_python_interpreter: python
+
+- name: Query variable on remote node
+  hosts: conf_node
+  gather_facts: false
+  vars_files:
+    - "osconf.json"
+  tasks:
+    - name: xxxx
+      vars:
+#         conf_file: "{{ conf }}"
+#         conf_section: "{{ section }}"
+#         conf_item: "{{ item }}"
+#         ovalue: "{{ lookup('ini', '{{ conf_item }} section={{ conf_section }} file={{ conf_file }}') }}"
+        ovalue: "{{ lookup('ini', '{{ item }} section={{ section }} file={{ conf }}') }}"
+      debug: msg="{{ ovalue }}"
+...

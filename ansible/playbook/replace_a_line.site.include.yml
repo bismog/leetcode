@@ -1,0 +1,8 @@
+---
+- name: replace httpd.conf configuration
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - include: roles/apache/tasks/replace_a_line_002.yml
+#    roles: 
+#      - apache

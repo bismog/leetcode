@@ -1,0 +1,15 @@
+---
+- hosts: random-choose
+  gather_facts: false
+  tasks:
+    - name: do something and failed
+#      command: ping "10.20.30.40"
+      shell: >
+        ls  / &&
+        eeeeeecho "home" &&
+        exit 0
+#      ignore_errors: no
+      ignore_errors: yes
+
+    - name: continue to do
+      shell: echo 'see you'
