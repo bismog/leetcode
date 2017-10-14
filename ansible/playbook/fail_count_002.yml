@@ -1,6 +1,6 @@
 ---
 - name: sdfasdfas
-  hosts: liyuying
+  hosts: lyy
   gather_facts: false
   tasks:
     - name: start httpd

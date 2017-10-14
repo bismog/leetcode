@@ -8,8 +8,8 @@
     - name: add hostx
       add_host:
         groups: hostx
-        name: liyuying
-        ansible_ssh_host: liyuying
+        name: lyy
+        ansible_ssh_host: lyy
         ansible_ssh_user: root
         ansible_ssh_pass: ossdbg1
         ansible_python_interpreter: python
@@ -23,7 +23,7 @@
         ansible_python_interpreter: python
 
 - name: run shell scripts
-  hosts: liyuying, hostz
+  hosts: lyy, hostz
   remote_user: root
   become: true
   become_user: root

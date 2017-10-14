@@ -1,10 +1,10 @@
 {
     "key1": {
-            "chenxueying": "project0xxx",
-            "liyuying": "project0xxx"
+            "cxy": "project0xxx",
+            "lyy": "project0xxx"
     },
     "key2": [
-        "chenxueying",
-        "liyuying"
+        "cxy",
+        "lyy"
     ]
 }

@@ -1,6 +1,6 @@
 ---
 - name: iptables handling
-  hosts: chenxueying
+  hosts: cxy
   gather_facts: false
   become: true
   roles:

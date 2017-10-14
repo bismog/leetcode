@@ -174,7 +174,7 @@ class Gerrit(object):
                     },
                     {
                         "by": {
-                            "email": "cheng.maolin@companyxxx.com.cn",
+                            "email": "c.ml@companyxxx.com.cn",
                             "name": "workidxxx",
                             "username": "workidxxx"
                         },
@@ -223,7 +223,7 @@ class Gerrit(object):
                     "labels": [
                         {
                             "by": {
-                                "email": "cheng.maolin@companyxxx.com.cn",
+                                "email": "c.ml@companyxxx.com.cn",
                                 "name": "workidxxx",
                                 "username": "workidxxx"
                             },

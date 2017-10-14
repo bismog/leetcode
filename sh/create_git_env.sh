@@ -61,10 +61,10 @@ cd /home/git/
 # Here please replace 'workidxxx' to your id
 git clone --branch upstreamfirst --single-branch ssh://workidxxx@gerrit.companyxxx.com.cn:29418/project0xxx/projectxxx
 cd projectxxx
-# Here please replace 'chengmaolin' to your real name
-git config user.name chengmaolin
-# Here please replace 'cheng.maolin@companyxxx.com.cn' to your real email
-git config user.email cheng.maolin@companyxxx.com.cn
+# Here please replace 'cml' to your real name
+git config user.name cml
+# Here please replace 'c.ml@companyxxx.com.cn' to your real email
+git config user.email c.ml@companyxxx.com.cn
 
 # project0xxx/projectxxx branch upstreamfirst has a weird trick by putting some code to a 
 # special direcotry 'upstream', so we must run a copy-to-dest script before

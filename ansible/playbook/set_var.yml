@@ -1,5 +1,5 @@
 - name: config rc file
-  hosts: chenxueying
+  hosts: cxy
   vars:
     PUBLIC_IP: "172.255.201.170"
   remote_user: project0xxx
