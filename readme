@@ -1,7 +1,6 @@
 This project is just for self-practice, no special usage.
 
-Before running, replace some string to what you actually are:
-grep -ril project0xxx | xargs -i sed -i 's/project0xxx/the-one-you-actually-are/gI'
-These could be companyxxx, project0xxx, projectxxx,workidxxx.
-But for case sensitive, you should rejust it in need.
+grep -ril project0xxx | xargs -i sed -i 's/project0xxx/the-one-actually-are/gI'
+These could be companyxxx, project0xxx, projectxxx, workidxxx.
+For case sensitive, adjust it in need.
 
