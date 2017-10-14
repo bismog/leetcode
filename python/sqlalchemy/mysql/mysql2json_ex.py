@@ -7,7 +7,7 @@ from sqlalchemy import create_engine,text
 from sqlalchemy.orm import sessionmaker
 
 def main(dump_file='/tmp/cluster_nodes.json'):
-    engine = create_engine('mysql+mysqldb://daisy:daisy@127.0.0.1:13306/daisy?charset=utf8')
+    engine = create_engine('mysql+mysqldb://projectxxx:projectxxx@127.0.0.1:13306/projectxxx?charset=utf8')
     Session = sessionmaker(bind=engine)
     session = Session()
 

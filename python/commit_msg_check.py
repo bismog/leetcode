@@ -73,8 +73,8 @@ def __check(jobinfo):
     keywords = {'[EC':'614000123456',
                 '[Refs #':'12345', 
                 '[Feature #':'12345', '[Story #':'12345', 
-                'Jira: DAISY-':'345',
-                'Revert "Jira: DAISY-': '345',
+                'Jira: projectxxx-':'345',
+                'Revert "Jira: projectxxx-': '345',
                 }
     # check ec
     #ret = __check_ec(jobinfo)
@@ -108,7 +108,7 @@ def CommitMesgCheck(argv):
 
 if __name__ == '__main__':
     #jobinfo = {'GERRIT_CHANGE_SUBJECT':'', 'GERRIT_CHANGE_COMMIT_MESSAGE':''}
-    jobinfo = {'GERRIT_CHANGE_SUBJECT':'Revert "Jira: daisy-506 Disable haproxy logging"'}
+    jobinfo = {'GERRIT_CHANGE_SUBJECT':'Revert "Jira: projectxxx-506 Disable haproxy logging"'}
     ret = __do_handle(sys.argv[1:], jobinfo)
     sys.exit(ret)
 

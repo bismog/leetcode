@@ -17,9 +17,9 @@ class Product(Base):
     def __repr__(self):
         return "<Product(id='%d', name='%s', count='%d')>"%(self.id, self.name, self.count)
      
-# DB_CON_STR = 'mysql+mysqldb://daisy:daisy@127.0.0.1:13306/test?charset=utf8'
+# DB_CON_STR = 'mysql+mysqldb://projectxxx:projectxxx@127.0.0.1:13306/test?charset=utf8'
 # engine = create_engine(DB_CON_STR, echo=False)
-engine = create_engine('mysql+mysqldb://daisy:daisy@127.0.0.1:13306/test?charset=utf8')
+engine = create_engine('mysql+mysqldb://projectxxx:projectxxx@127.0.0.1:13306/test?charset=utf8')
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)

@@ -2,9 +2,9 @@
   hosts: chenxueying
   vars:
     PUBLIC_IP: "172.255.201.170"
-  remote_user: tecs
+  remote_user: project0xxx
   become: true
-  become_user: tecs
+  become_user: project0xxx
   gather_facts: false
   strategy: free
   tasks:
@@ -12,10 +12,10 @@
       vars:
         PUBLIC_IP: "10.20.30.40"
       template:
-        src: /home/git/daisy/backend/tecs/ansible/keystonerc_admin.j2
-        dest: /home/tecs/keystonerc_admin
-        owner: tecs
-        group: tecs
+        src: /home/git/projectxxx/backend/project0xxx/ansible/keystonerc_admin.j2
+        dest: /home/project0xxx/keystonerc_admin
+        owner: project0xxx
+        group: project0xxx
         mode: 0666
         force: yes
   tags: rc_file

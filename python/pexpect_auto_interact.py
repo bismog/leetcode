@@ -3,8 +3,8 @@
 import pexpect
 
 if __name__ == "__main__":
-    usr = "zte"
-    psd = "zte"
+    usr = "companyxxx"
+    psd = "companyxxx"
     host = "128.128.0.166"
     en_psd = "zxr10"
 

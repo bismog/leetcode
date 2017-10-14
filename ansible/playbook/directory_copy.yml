@@ -7,7 +7,7 @@
   tasks:
     - name: recusively copy directory to remote
       copy:
-        src: /home/tmp/daisy/xxx
+        src: /home/tmp/projectxxx/xxx
         dest: /tmp/
         directory_mode: "0755"
         # recurse: yes   # no recurse in module 'copy'

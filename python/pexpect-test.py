@@ -11,7 +11,7 @@ import pexpect
 if __name__ == '__main__':
     user = 'root'
     ip = '10.43.114.54'
-    mypassword = 'ztescs'
+    mypassword = 'companyxxxscs'
  
     print user
     child = pexpect.spawn('ssh %s@%s' % (user,ip))

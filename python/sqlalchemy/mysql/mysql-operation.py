@@ -4,12 +4,12 @@
 import MySQLdb
 
 try:
-    # conn = MySQLdb.connect(user='daisy', passwd='daisy', host='localhost', port=13306)
-    conn = MySQLdb.connect(user='daisy', passwd='daisy', host='127.0.0.1', port=13306)
+    # conn = MySQLdb.connect(user='projectxxx', passwd='projectxxx', host='localhost', port=13306)
+    conn = MySQLdb.connect(user='projectxxx', passwd='projectxxx', host='127.0.0.1', port=13306)
 except MySQLdb.ERROR as e:
     print "connect mysql failed."
     exit(1)
-conn.select_db('daisy')
+conn.select_db('projectxxx')
 cur = conn.cursor()
 
 

@@ -10,8 +10,8 @@
         ansible_ssh_user: "{{ item.user }}"
         ansible_ssh_pass: "{{ item.password }}"
       with_items:
-        - { "host":"chenxueying", "user":"tecs", "password":"ossdbg1" }
-        - { "host":"liyuying", "user":"tecs", "password":"ossdbg1" }
+        - { "host":"chenxueying", "user":"project0xxx", "password":"ossdbg1" }
+        - { "host":"liyuying", "user":"project0xxx", "password":"ossdbg1" }
   tags: add_hosts
 
 - name: do something

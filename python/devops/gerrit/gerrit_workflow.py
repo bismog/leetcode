@@ -10,15 +10,15 @@ EXCLUDED_CHANGE=[]
 # Not include QA for QA may has many issue state as 'to-be-verified' to 
 # manage, it would be a large of noise
 team_member = [
-    'li.jianzheng@zte.com.cn', 
-    'chen.yaling@zte.com.cn', 
-    'wang.dongsheng@zte.com.cn', 
-    'li.yuying2@zte.com.cn',
-    'gao.ming36@zte.com.cn',
-    'yao.junchao@zte.com.cn',
-    'zhao.shanshan3@zte.com.cn',
-    'wu.wei266@zte.com.cn',
-    'cheng.maolin@zte.com.cn'
+    '@companyxxx.com.cn', 
+    '@companyxxx.com.cn', 
+    '@companyxxx.com.cn', 
+    '@companyxxx.com.cn',
+    '@companyxxx.com.cn',
+    '@companyxxx.com.cn',
+    '@companyxxx.com.cn',
+    '@companyxxx.com.cn',
+    '@companyxxx.com.cn'
 ]
 
 def get_owner(review):
@@ -116,7 +116,7 @@ class Gerrit(object):
     def get_review_list(self, members):
         owner_list = ['o:'+ow for ow in members]
         owner_syntax = ' OR '.join(owner_list)
-        command_query = 'ssh 10033363@gerrit.zte.com.cn -p 29418 gerrit query ' + '\(' + owner_syntax + '\) ' + 'status:open'
+        command_query = 'ssh workidxxx@gerrit.companyxxx.com.cn -p 29418 gerrit query ' + '\(' + owner_syntax + '\) ' + 'status:open'
         command_grep = 'grep number'
         query = subprocess.Popen(command_query.split(), stdout=subprocess.PIPE)
         grep = subprocess.Popen(command_grep.split(), stdin=query.stdout, stdout=subprocess.PIPE)
@@ -146,13 +146,13 @@ class Gerrit(object):
         Assume review be something like following:
         {
             "branch": "upstreamfirst",
-            "commitMessage": "Jira: DAISY-1962... Change-Id: Iabe5fc389fbc032098452b9e5c82d10e98d468c9\n",
+            "commitMessage": "Jira: projectxxx-1962... Change-Id: Iabe5fc389fbc032098452b9e5c82d10e98d468c9\n",
             "createdOn": 1496318601,
             "currentPatchSet": {
                 "approvals": [
                     {
                         "by": {
-                            "email": "jenkins_tfg@zte.com.cn",
+                            "email": "jenkins_tfg@companyxxx.com.cn",
                             "name": "Jenkins_TFG",
                             "username": "jenkins_tfg"
                         },
@@ -163,7 +163,7 @@ class Gerrit(object):
                     },
                     {
                         "by": {
-                            "email": "zuul-ci@zte.com.cn",
+                            "email": "zuul-ci@companyxxx.com.cn",
                             "name": "Niv Zuul CI",
                             "username": "zuul-ci"
                         },
@@ -174,9 +174,9 @@ class Gerrit(object):
                     },
                     {
                         "by": {
-                            "email": "cheng.maolin@zte.com.cn",
-                            "name": "10033363",
-                            "username": "10033363"
+                            "email": "cheng.maolin@companyxxx.com.cn",
+                            "name": "workidxxx",
+                            "username": "workidxxx"
                         },
                         "description": "Code-Review",
                         "grantedOn": 1496388308,
@@ -185,7 +185,7 @@ class Gerrit(object):
                     }
                 ],
                 "author": {
-                    "email": "zhao.shanshan3@zte.com.cn",
+                    "email": "zhao.shanshan3@companyxxx.com.cn",
                     "name": "00168455",
                     "username": "00168455"
                 },
@@ -201,7 +201,7 @@ class Gerrit(object):
                 "sizeDeletions": -25,
                 "sizeInsertions": 24,
                 "uploader": {
-                    "email": "zhao.shanshan3@zte.com.cn",
+                    "email": "zhao.shanshan3@companyxxx.com.cn",
                     "name": "00168455",
                     "username": "00168455"
                 }
@@ -211,21 +211,21 @@ class Gerrit(object):
             "number": "258963",
             "open": true,
             "owner": {
-                "email": "zhao.shanshan3@zte.com.cn",
+                "email": "zhao.shanshan3@companyxxx.com.cn",
                 "name": "00168455",
                 "username": "00168455"
             },
-            "project": "tecs/daisy",
+            "project": "project0xxx/projectxxx",
             "status": "NEW",
-            "subject": "Jira: DAISY-1962...",
+            "subject": "Jira: projectxxx-1962...",
             "submitRecords": [
                 {
                     "labels": [
                         {
                             "by": {
-                                "email": "cheng.maolin@zte.com.cn",
-                                "name": "10033363",
-                                "username": "10033363"
+                                "email": "cheng.maolin@companyxxx.com.cn",
+                                "name": "workidxxx",
+                                "username": "workidxxx"
                             },
                             "label": "Code-Review",
                             "status": "OK"
@@ -242,10 +242,10 @@ class Gerrit(object):
                     "status": "NOT_READY"
                 }
             ],
-            "url": "http://gerrit.zte.com.cn/258963"
+            "url": "http://gerrit.companyxxx.com.cn/258963"
         }
         '''
-        cmd_gerrit_query = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'query', '--format', 'json', '--current-patch-set', '--submit-records', str(number)]
+        cmd_gerrit_query = ['ssh', 'workidxxx@gerrit.companyxxx.com.cn', '-p', '29418', 'gerrit', 'query', '--format', 'json', '--current-patch-set', '--submit-records', str(number)]
         p = subprocess.Popen(cmd_gerrit_query, stdout=subprocess.PIPE)
         out = p.communicate()
         out = self.trim_object(out[0])
@@ -290,7 +290,7 @@ class Gerrit(object):
              gerrit review --code-review +2 $commit_id
         '''
         ci = self.get_change_info(review)
-        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--code-review', '+2', str(ci['commit'])]
+        cmd_recheck = ['ssh', 'workidxxx@gerrit.companyxxx.com.cn', '-p', '29418', 'gerrit', 'review', '--code-review', '+2', str(ci['commit'])]
         p = subprocess.Popen(cmd_recheck, stdout=subprocess.PIPE)
         p.communicate()
         print "%s(%s: %s) reviewed." % (ci['change'], ci['project'], ci['commit'])
@@ -301,7 +301,7 @@ class Gerrit(object):
             gerrit review -m "recheck\ niv" $commit_id
         '''
         ci = self.get_change_info(review)
-        cmd_recheck = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"recheck\ niv"', str(ci['commit'])]
+        cmd_recheck = ['ssh', 'workidxxx@gerrit.companyxxx.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"recheck\ niv"', str(ci['commit'])]
         p = subprocess.Popen(cmd_recheck, stdout=subprocess.PIPE)
         p.communicate()
         print "%s(%s: %s) rechecked." % (ci['change'], ci['project'], ci['commit'])
@@ -312,7 +312,7 @@ class Gerrit(object):
             gerrit review -m "regate\ niv" $commit
         '''
         ci = self.get_change_info(review)
-        cmd_regate = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"regate\ niv"', str(ci['commit'])]
+        cmd_regate = ['ssh', 'workidxxx@gerrit.companyxxx.com.cn', '-p', '29418', 'gerrit', 'review', '-m', '"regate\ niv"', str(ci['commit'])]
         p = subprocess.Popen(cmd_regate, stdout=subprocess.PIPE)
         p.communicate()
         print "%s(%s: %s) regated." % (ci['change'], ci['project'], ci['commit'])
@@ -323,7 +323,7 @@ class Gerrit(object):
             gerrit review --workflow +1 $commit_id
         '''
         ci = self.get_change_info(review)
-        cmd_workflow = ['ssh', '10033363@gerrit.zte.com.cn', '-p', '29418', 'gerrit', 'review', '--workflow', '+1', str(ci['commit'])]
+        cmd_workflow = ['ssh', 'workidxxx@gerrit.companyxxx.com.cn', '-p', '29418', 'gerrit', 'review', '--workflow', '+1', str(ci['commit'])]
         p = subprocess.Popen(cmd_workflow, stdout=subprocess.PIPE)
         p.communicate()
         print "%s(%s: %s) workflow+1." % (ci['change'], ci['project'], ci['commit'])

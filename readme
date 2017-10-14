@@ -1,0 +1,7 @@
+Before running, replace some sensitive string to what you actually are:
+grep -ril companyxxx | xargs -i sed -i 's/companyxxx/the-one-you-actually-are/gI'
+grep -ril project0xxx | xargs -i sed -i 's/project0xxx/the-one-you-actually-are/gI'
+grep -ril projectxxx | xargs -i sed -i 's/projectxxx/the-one-you-actually-are/gI'
+grep -ril workidxxx | xargs -i sed -i 's/workidxxx/the-one-you-actually-are/gI'
+But for case sensitive, you should rejust it in need.
+

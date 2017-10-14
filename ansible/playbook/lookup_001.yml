@@ -3,8 +3,8 @@
   hosts: debughost
   gather_facts: false
   vars:
-    json_contents: "{{ lookup('file', '/home/refer/daisy/ansible_discovery.json') }}"
-    yaml_contents: "{{ lookup('file', '/home/refer/daisy/site.yml')  }}"
+    json_contents: "{{ lookup('file', '/home/refer/projectxxx/ansible_discovery.json') }}"
+    yaml_contents: "{{ lookup('file', '/home/refer/projectxxx/site.yml')  }}"
     local_home: "{{ lookup('env', 'HOME') }}"
   tasks:
 #    - name: debug show json contents

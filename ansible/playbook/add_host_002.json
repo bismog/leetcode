@@ -3,11 +3,11 @@
         "controller1": {
             "IP": "10.43.203.46",
             "PASSWORD": "ossdbg1",
-            "USER": "tecs"
+            "USER": "project0xxx"
         },
         "controller2": {
             "IP": "10.43.211.56",
-            "PASSWORD": "ztescs",
+            "PASSWORD": "companyxxxscs",
             "USER": "root"
         }
     },

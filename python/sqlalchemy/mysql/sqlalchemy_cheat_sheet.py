@@ -13,7 +13,7 @@ import datetime
 Base = declarative_base()
 
 # DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
-engine = create_engine('mysql+mysqldb://daisy:daisy@127.0.0.1:13306/test?charset=utf8')
+engine = create_engine('mysql+mysqldb://projectxxx:projectxxx@127.0.0.1:13306/test?charset=utf8')
 DBSession = sessionmaker(bind=engine)
 
 class Book(Base):

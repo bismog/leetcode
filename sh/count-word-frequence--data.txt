@@ -107,7 +107,7 @@ kmod-usb-uhci
 kmod-usb2
 kmod-via-rhine
 kmod-via-velocity
-kmod-zte-board-dev
+kmod-companyxxx-board-dev
 ldd
 libapr
 libaprutil
@@ -307,4 +307,4 @@ zoneinfo-pacific
 zoneinfo-poles
 zoneinfo-simple
 zoneinfo-southamerica
-zte-utils
+companyxxx-utils

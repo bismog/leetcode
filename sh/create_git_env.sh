@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 # -*- coding:utf-8 -*-
 
-# In order to build code environment in daisy container, we would have to 
+# In order to build code environment in projectxxx container, we would have to 
 # prepare some tools such as git, git-review(optional)
 
 # update /etc/hosts, append following domain name:
-# gerrit.zte.com.cn     (mandatory)
-# gerritro.zte.com.cn   (optional)
-# mirrors.zte.com.cn    (mandatory)
-# artifacts.zte.com.cn  (optional)
+# gerrit.companyxxx.com.cn     (mandatory)
+# mirrors.companyxxx.com.cn    (mandatory)
+# artifacts.companyxxx.com.cn  (optional)
 cat <<EOF >> /etc/hosts
-10.31.48.30     mirrors.zte.com.cn
-10.41.103.20    gerrit.zte.com.cn
-10.41.126.14    gerritro.zte.com.cn
-10.31.48.42     artifacts.zte.com.cn
+10.31.48.30     mirrors.companyxxx.com.cn
+10.41.103.20    gerrit.companyxxx.com.cn
+10.31.48.42     artifacts.companyxxx.com.cn
 EOF
 
 # for repo in $(ls -1 /etc/yum.repos.d)
@@ -21,27 +19,27 @@ EOF
 #     mv ${repo} ${repo}.xxx
 # done
 # scp root@10.43.174.101:/etc/yum.repos.d/centos7.repo /etc/yum.repos.d/
-# scp root@10.43.174.101:/etc/yum.repos.d/contrib_daisy.repo /etc/yum.repos.d/
-# scp root@10.43.174.101:/etc/yum.repos.d/contrib_tecs.repo /etc/yum.repos.d/
+# scp root@10.43.174.101:/etc/yum.repos.d/contrib_projectxxx.repo /etc/yum.repos.d/
+# scp root@10.43.174.101:/etc/yum.repos.d/contrib_project0xxx.repo /etc/yum.repos.d/
 curl -o /etc/yum.repos.d/centos7.repo http://10.43.211.64/repofile/centos7.repo
-curl -o /etc/yum.repos.d/contrib_daisy.repo http://10.43.211.64/repofile/contrib_daisy.repo
+curl -o /etc/yum.repos.d/contrib_projectxxx.repo http://10.43.211.64/repofile/contrib_projectxxx.repo
 
 yum install --disablerepo=* --enablerepo=centos7 -y git
-yum install --disablerepo=* --enablerepo=contrib_daisy -y python-pip
+yum install --disablerepo=* --enablerepo=contrib_projectxxx -y python-pip
 
 mkdir -p /root/.pip
 cat <<EOF > /root/.pip/pip.conf
 [global]
-index-url = http://mirrors.zte.com.cn/pypi/simple
-trusted-host = mirrors.zte.com.cn
+index-url = http://mirrors.companyxxx.com.cn/pypi/simple
+trusted-host = mirrors.companyxxx.com.cn
 format=legacy
 EOF
 pip install git-review
 
 # 
 rm -f /etc/yum.repos.d/centos7.repo
-rm -f /etc/yum.repos.d/contrib_daisy.repo
-# rm -f /etc/yum.repos.d/contrib_tecs.repo
+rm -f /etc/yum.repos.d/contrib_projectxxx.repo
+# rm -f /etc/yum.repos.d/contrib_project0xxx.repo
 # for repo in $(ls -1 /etc/yum.repos.d)
 # do
 #     # remove right part after last '.' character
@@ -60,15 +58,15 @@ done
 
 mkdir -p /home/git/
 cd /home/git/
-# Here please replace '10033363' to your id
-git clone --branch upstreamfirst --single-branch ssh://10033363@gerrit.zte.com.cn:29418/tecs/daisy
-cd daisy
+# Here please replace 'workidxxx' to your id
+git clone --branch upstreamfirst --single-branch ssh://workidxxx@gerrit.companyxxx.com.cn:29418/project0xxx/projectxxx
+cd projectxxx
 # Here please replace 'chengmaolin' to your real name
 git config user.name chengmaolin
-# Here please replace 'cheng.maolin@zte.com.cn' to your real email
-git config user.email cheng.maolin@zte.com.cn
+# Here please replace 'cheng.maolin@companyxxx.com.cn' to your real email
+git config user.email cheng.maolin@companyxxx.com.cn
 
-# tecs/daisy branch upstreamfirst has a weird trick by putting some code to a 
+# project0xxx/projectxxx branch upstreamfirst has a weird trick by putting some code to a 
 # special direcotry 'upstream', so we must run a copy-to-dest script before
 # run them.
 pushd tools
@@ -80,23 +78,23 @@ git commit -m 'copy_code'
 # create .gitreview for 'git review ...' command
 cat <<EOF > .gitreview
 [gerrit]
-host=gerrit.zte.com.cn
+host=gerrit.companyxxx.com.cn
 port=29418
-project=tecs/daisy
+project=project0xxx/projectxxx
 defaultbranch=upstreamfirst
 defaultremote=origin
 defaultrebase=0
 EOF
 
 # Mount source code with bind mode to real directory while service running
-mount -B code/daisy/daisy /lib/python2.7/site-packages/daisy
-mount -B code/daisyclient/daisyclient /lib/python2.7/site-packages/daisyclient
+mount -B code/projectxxx/projectxxx /lib/python2.7/site-packages/projectxxx
+mount -B code/projectxxxclient/projectxxxclient /lib/python2.7/site-packages/projectxxxclient
 mount -B code/horizon/openstack_dashboard/dashboards /usr/share/openstack-dashboard/openstack_dashboard/dashboards
 mount -B code/horizon/openstack_dashboard/locale /usr/share/openstack-dashboard/openstack_dashboard/locale
 mount -B code/horizon/openstack_dashboard/api /usr/share/openstack-dashboard/openstack_dashboard/api
 
-# Synchronize daisy database
-daisy-manage db_sync
+# Synchronize projectxxx database
+projectxxx-manage db_sync
 
 # Now you can do 'git merge' or 'git cherry-pick' or 'alter and git add git 
 # commit' to adjust your code. After all these done, just restart related 

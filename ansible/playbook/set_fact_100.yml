@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - tecs.copy.json
+    - project0xxx.copy.json
   connection: local
   tasks:
     - name: add ha host
@@ -48,7 +48,7 @@
 # - name: keystone runcom file for root user and group
 #   hosts: lb_nodes
 #   vars_files:
-#     - tecs.copy.json
+#     - project0xxx.copy.json
 #   gather_facts: false
 #   remote_user: root
 #   strategy: free
@@ -67,7 +67,7 @@
 # - name: keystone runcom file
 #   hosts: lb_nodes
 #   vars_files:
-#     - tecs.copy.json
+#     - project0xxx.copy.json
 #   gather_facts: false
 #   become: true
 #   become_user: "{{ ansible_ssh_user }}"

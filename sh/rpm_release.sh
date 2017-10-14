@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 package=$1              # Path to package file, such as /tmp/scsi-target-utils-1.0.46-3.el7.x86_64.rpm
-project=$2              # 'daisy' or 'tecs'
-branch=$3               # For daisy, it may be
-                        # For tecs, it may be 'p8', 'dev' or 'dev3.0'
+project=$2              # 'projectxxx' or 'project0xxx'
+branch=$3               # For projectxxx, it may be
+                        # For project0xxx, it may be 'p8', 'dev' or 'dev3.0'
 
 REPOBASE=10.43.177.198
 package_name=$(rpm --query-format '%{NAME}' -qp ${package})
 
 case $project in
-    daisy)
-    target_path=/var/www/html/repo/yum/daisy
+    projectxxx)
+    target_path=/var/www/html/repo/yum/projectxxx
     case $branch in
         usf)
         list_name=contrib_rpm.usf.list
@@ -27,22 +27,22 @@ case $project in
         # help_for_me
         ;;
 
-    tecs)
+    project0xxx)
     case $branch in
         p8)
-        target_path=/var/www/html/repo/yum/tecs/20
+        target_path=/var/www/html/repo/yum/project0xxx/20
         list_name=p8_rpm_needs_package.list
         tar_name=contrib_rpm_p8.tar.gz
         ;;
 
         dev)
-        target_path=/var/www/html/repo/yum/tecs/20
+        target_path=/var/www/html/repo/yum/project0xxx/20
         list_name=dev_rpm_needs_package.list
         tar_name=contrib_rpm_dev.tar.gz
         ;;
 
         dev3.0)
-        target_path=/var/www/html/repo/yum/tecs/30
+        target_path=/var/www/html/repo/yum/project0xxx/30
         list_name=dev30_rpm_needs_package.list
         tar_name=contrib_rpm_dev30.tar.gz
         ;;
@@ -55,13 +55,13 @@ case $project in
     # help_for_me
     ;;
 esac
-# if [ "$project" == "daisy" ];then
-#     target_path=/var/www/html/repo/yum/daisy
+# if [ "$project" == "projectxxx" ];then
+#     target_path=/var/www/html/repo/yum/projectxxx
 # else if [ "$branch" == "dev3.0" ];then
-#     target_path=/var/www/html/repo/yum/tecs/30
+#     target_path=/var/www/html/repo/yum/project0xxx/30
 #     alias_id=dev30
 # else
-#     target_path=/var/www/html/repo/yum/tecs/20
+#     target_path=/var/www/html/repo/yum/project0xxx/20
 #     alias_id=
 # else
 #     echo "Unsure what project and branch you mean."

@@ -9,12 +9,12 @@ import BaseHTTPServer,SocketServer, cgi
 from os import curdir,sep, path, chmod
 
 uploadhtml='''<html><body>
-<p>上传RPM包到TECS版本服务器</p>
+<p>上传RPM包到project0xxx版本服务器</p>
 <form enctype="multipart/form-data" action="/" method="post" target="_blank">
 <br />
 <p>Project: 
-<input type="radio" name="project" value="daisy" /> Daisy
-<input type="radio" name="project" value="tecs" checked /> TECS
+<input type="radio" name="project" value="projectxxx" /> projectxxx
+<input type="radio" name="project" value="project0xxx" checked /> project0xxx
 </p>
 <p>RPM files: <input type="file" name="files" multiple="" ></p>
 <br />
@@ -63,8 +63,8 @@ class WebHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         try:
             # fields = form.keys()  # fields should be ['project', 'files']
             # 'form.getvalue()', quote from http://www.w3big.com/zh-TW/python/python-cgi.html
-            daisy_or_tecs = form.getvalue('project')
-            target_dir = BASEDIR + daisy_or_tecs
+            projectxxx_or_project0xxx = form.getvalue('project')
+            target_dir = BASEDIR + projectxxx_or_project0xxx
             field_items = form['files']
             # https://stackoverflow.com/questions/12240267/uploading-multiple-files-via-single-form-field-via-python-cgi
             if isinstance(field_items, list):

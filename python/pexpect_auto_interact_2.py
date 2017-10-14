@@ -3,7 +3,7 @@ import pexpect
 
 if __name__ == "__main__":
     usr = "root"
-    psd = "ztescs"
+    psd = "companyxxxscs"
     host = "10.43.177.146"
 
     pe = pexpect.spawn("ssh %s" % host)

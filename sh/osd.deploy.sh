@@ -2,7 +2,7 @@
 
 #get conf file and keyring from node monitor
 #mon_user="root"
-#mon_psd="ztescs"
+#mon_psd="companyxxxscs"
 #mon_hostname="cml01"
 #scp $mon_user@$mon_hostname:/etc/ceph/ceph.conf /etc/ceph/
 #expect "$mon_user@$mon_hostname's password:"

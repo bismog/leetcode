@@ -147,8 +147,8 @@ def classify(tree, fields):
     """
 <rss version="0.92">
     <channel>
-        <title>ZTE JIRA</title>
-        <link>http://jira.zte.com.cn/issues/?jql=...</link>
+        <title>companyxxx JIRA</title>
+        <link>http://jira.companyxxx.com.cn/issues/?jql=...</link>
         <description>An XML representation of a search request</description>
         <language>en-us</language>
         <issue start="0" end="7" total="7"/>
@@ -158,12 +158,12 @@ def classify(tree, fields):
             <build-date>09-03-2016</build-date>
         </build-info>
 <item>
-    <link>http://jira.zte.com.cn/browse/DAISY-1985</link>
-    <key id="96952">DAISY-1985</key>
+    <link>http://jira.companyxxx.com.cn/browse/projectxxx-1985</link>
+    <key id="96952">projectxxx-1985</key>
     <summary>...</summary>
-    <type id="10004" iconUrl="http://jira.zte.com.cn/secure/viewavatar?size=xsmall&amp;avatarId=10303&amp;avatarType=issuetype">Bug</type>
-    <priority id="4" iconUrl="http://jira.zte.com.cn/images/icons/priorities/low.svg">Low</priority>
-    <status id="10000" iconUrl="http://jira.zte.com.cn/" description="">To Do</status>
+    <type id="10004" iconUrl="http://jira.companyxxx.com.cn/secure/viewavatar?size=xsmall&amp;avatarId=10303&amp;avatarType=issuetype">Bug</type>
+    <priority id="4" iconUrl="http://jira.companyxxx.com.cn/images/icons/priorities/low.svg">Low</priority>
+    <status id="10000" iconUrl="http://jira.companyxxx.com.cn/" description="">To Do</status>
     <statusCategory id="2" key="new" colorName="blue-gray"/>
     <assignee username="00024906">&#38472;&#20122;&#29618;00024906</assignee>
 </item>

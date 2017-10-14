@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   vars_files:
-    - "/home/refer/daisy/tecs.json"
+    - "/home/refer/projectxxx/project0xxx.json"
   vars:
     develop_branch:
       "dev": "xyz"

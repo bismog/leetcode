@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 Base = declarative_base()
-engine = create_engine('mysql://daisy:daisy@127.0.0.1:13306/test')
+engine = create_engine('mysql://projectxxx:projectxxx@127.0.0.1:13306/test')
 
 
 class Fruit(Base):
@@ -63,7 +63,7 @@ session.add(fruit3)
 session.commit()
 
 # Till now, we can get following data from table 'fruit':
-# [<:>]# mysql test -h 127.0.0.1 -udaisy -pdaisy -P 13306 -se 'select * from fruit'
+# [<:>]# mysql test -h 127.0.0.1 -uprojectxxx -pprojectxxx -P 13306 -se 'select * from fruit'
 # id      name    color
 # 1       apple   red
 # 2       banana  yellow
