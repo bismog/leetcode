@@ -1,0 +1,8 @@
+---
+- name: Lookup dig
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - debug:
+        msg: "{{ lookup('dig', 'www.google.com', wantlist=True) }}"

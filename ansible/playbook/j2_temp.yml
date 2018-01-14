@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: implement template
+      vars:
+        filepath: /tmp/xxx
+        tomcat_2_value: gogogo
+      template:
+        src: jinja2_temp.conf.j2
+        dest: /tmp/jinja2_temp.conf
+        force: true

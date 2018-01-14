@@ -1,0 +1,8 @@
+---
+- name: Lookup csvfile
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - debug:
+        msg: "{{ lookup('csvfile', 'Mumbai file=city_data.csv delimiter=, col=2') }}"

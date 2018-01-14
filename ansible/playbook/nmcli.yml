@@ -1,0 +1,12 @@
+---
+- name: Try nmcli
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - nmcli:
+        conn_name: eth2
+        ifname: eth2
+        ip4: 192.161.1.2
+        gw4: 192.161.1.1
+        state: present

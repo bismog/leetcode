@@ -1,0 +1,12 @@
+---
+DEFAULT:
+  user: "nova"
+  password: "nova"
+  auth_url: "http://127.0.0.1/v2"
+  delay: 10
+keystone:
+  user: "keystone"
+  pass: "keystone"
+  overwrite: False
+  length: 16
+  expired: 16000
