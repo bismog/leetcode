@@ -1,0 +1,13 @@
+version: "3"
+services:
+  demo:
+    image: registry:2
+    ports:
+      - 5005:5000
+    expose:
+      - 8888
+      - 9999
+    environment:
+      ENV_A: "ea"
+      ENV_B: "eb"
+    container_name: registry2

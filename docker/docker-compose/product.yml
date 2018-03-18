@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  product-service:
+    build: ./product
+    volumes:
+      - ./product:/var/src/app
+    ports:
+      - 5001:80
+  redis:
+    image: "redis:alpine"
