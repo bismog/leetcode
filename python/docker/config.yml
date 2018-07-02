@@ -1,0 +1,11 @@
+source_registry:
+  url: https://docker.example.com
+  username: some_user
+  password: some_password
+
+destination_registry:
+  url: http://127.0.0.1:5000
+
+repositories:
+  - company/super-project
+  - company/cool-project
