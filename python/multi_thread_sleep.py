@@ -5,10 +5,10 @@ from time import sleep, ctime
 
 loops = [4,2]
 
-    def loop(nloop, nsec):
-        print 'start loop ', nloop, 'at ', ctime()
-        sleep(nsec)
-        print 'end loop ', nloop, 'at ', ctime()
+def loop(nloop, nsec):
+    print 'start loop ', nloop, 'at ', ctime()
+    sleep(nsec)
+    print 'end loop ', nloop, 'at ', ctime()
 
 def main():
     print 'starting at ', ctime()
