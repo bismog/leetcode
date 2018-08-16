@@ -21,11 +21,11 @@ target = 9
 
 
 ##  http://stackoverflow.com/questions/30021060/two-sum-on-leetcode
-def twosum(nums=(6, 7, 11, 15, 3, 6, 5, 3, 1), target=6):
+def twosum(nums=(6, 7, 11, 15, 3, 6, 5, 3, 1), target=13):
     lookup = dict(((v, i) for i, v in enumerate(nums)))
     # print lookup
     # iters = ( (i+1, lookup.get(target-v)+1) for i, v in enumerate(nums) if lookup.get(target-v, i) != i)
-    iters = ( (i+1, lookup.get(target-v)+1) for i, v in enumerate(nums) if lookup.get(target-v, i) > i)
+    iters = ( (nums[i], nums[lookup.get(target-v)]) for i, v in enumerate(nums) if lookup.get(target-v, i) > i)
     return iters
     # return next(iters , None)
 
