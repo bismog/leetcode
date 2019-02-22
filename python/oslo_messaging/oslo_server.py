@@ -2,6 +2,8 @@
 
 # coding: utf-8
 
+# This example came from https://chrigl.de/posts/2014/08/27/oslo-messaging-example.html
+
 from oslo.config import cfg
 from oslo import messaging
 import logging
