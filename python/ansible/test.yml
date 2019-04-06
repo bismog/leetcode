@@ -2,6 +2,7 @@
 - hosts: localhost
   gather_facts: false
   connection: local
+  become: true
   tasks:
     - command: "ls /"
       register: result
