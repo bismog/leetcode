@@ -126,7 +126,7 @@ for op in ops:
 # plt.ylabel('time(sec)')
 # plt.title('Concurrent Instances Operation')
 # plt.grid(True, linestyle='-', color='gray')        ## 'k' means black
-# plt.grid(True)        ## 'k' means black
+plt.grid(True)        ## 'k' means black
 # plt.legend()
 
 # fig.savefig('/home/tmp/vm_perf.png')
